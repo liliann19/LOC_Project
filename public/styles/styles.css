@@ -87,6 +87,7 @@ fieldset label[for="divDropdown"], legend {
 .errors{
     margin-left: 3rem;
     color: red;
+    display: none;
 }
 
 /* Test Test Testing */
