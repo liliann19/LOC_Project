@@ -1,0 +1,27 @@
+{
+  "name": "loc_project",
+  "version": "1.0.0",
+  "description": "Connor",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liliann19/LOC_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/liliann19/LOC_Project/issues"
+  },
+  "homepage": "https://github.com/liliann19/LOC_Project#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
