@@ -55,7 +55,7 @@ fieldset label[for="divDropdown"], legend {
 
 
 .divInfo input {
-    width: 100%;
+    width: 50%;
     padding: 0.4rem;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -81,4 +81,8 @@ fieldset label[for="divDropdown"], legend {
     padding: 10px;
     border-radius: 4px;
     width: 20%;
+}
+.errors{
+    margin-left: 3rem;
+    color: red;
 }
