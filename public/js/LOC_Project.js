@@ -91,3 +91,72 @@ function hideErrorsInput() {
 
 hideErrorsInput();
 
+const divisionData = {
+    fineArts: {
+        divName: "Fine Arts",
+        dean: "Meryl Streep",
+        penContact: "Leonardo DiCaprio",
+        locRep: "Natalie Portman",
+        chair: "Morgan Freeman"
+    },
+    humanities: {
+        divName: "Humanities",
+        dean: "Emma Watson",
+        penContact: "Tom Hanks",
+        locRep: "Anne Hathaway",
+        chair: "Robert Downey Jr."
+    },
+    socialScience: {
+        divName: "Social Science",
+        dean: "Viola Davis",
+        penContact: "Ryan Gosling",
+        locRep: "Zendaya",
+        chair: "Denzel Washington"
+    },
+    english: {
+        divName: "English",
+        dean: "Kate Winslet",
+        penContact: "Benedict Cumberbatch",
+        locRep: "Florence Pugh",
+        chair: "Hugh Jackman"
+    },
+    technology: {
+        divName: "Technology",
+        dean: "Scarlett Johansson",
+        penContact: "Chris Evans",
+        locRep: "Zoe Saldana",
+        chair: "Keanu Reeves"
+    },
+    healthScience: {
+        divName: "Health Science",
+        dean: "Sandra Bullock",
+        penContact: "Idris Elba",
+        locRep: "Gal Gadot",
+        chair: "Matthew McConaughey"
+    },
+    trades: {
+        divName: "Trades",
+        dean: "Jason Momoa",
+        penContact: "Jennifer Lawrence",
+        locRep: "Chris Pratt",
+        chair: "Margot Robbie"
+    }
+};
+
+document.getElementById('divDropdown').addEventListener('change', function() {
+    const selectedDivision = this.value;
+
+
+    if (selectedDivision === "Select") {
+        document.querySelectorAll('#form input[type="text"]').forEach(input => input.value = "");
+        return;
+    }
+
+    const data = divisionData[selectedDivision];
+
+    document.getElementById('divName').value = data.divName;
+    document.getElementById('dean').value = data.dean;
+    document.getElementById('penContact').value = data.penContact;
+    document.getElementById('locRep').value = data.locRep;
+    document.getElementById('chair').value = data.chair;
+});
