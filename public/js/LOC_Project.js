@@ -91,6 +91,8 @@ function hideErrorsInput() {
 
 hideErrorsInput();
 
+
+// Populated data for each division when selected from dropdown
 const divisionData = {
     fineArts: {
         divName: "Fine Arts",
@@ -143,10 +145,12 @@ const divisionData = {
     }
 };
 
+
+//Event listener for dropdown selector change
 document.getElementById('divDropdown').addEventListener('change', function() {
     const selectedDivision = this.value;
 
-
+    // if dropdown is on "Select a division there is no data shown"
     if (selectedDivision === "Select") {
         document.querySelectorAll('#form input[type="text"]').forEach(input => input.value = "");
         return;
@@ -154,6 +158,7 @@ document.getElementById('divDropdown').addEventListener('change', function() {
 
     const data = divisionData[selectedDivision];
 
+    //When division is selected the division fields change to populated division names
     document.getElementById('divName').value = data.divName;
     document.getElementById('dean').value = data.dean;
     document.getElementById('penContact').value = data.penContact;
