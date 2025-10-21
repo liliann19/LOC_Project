@@ -1,14 +1,6 @@
-
-
-
-document.getElementById('form').onreset = () => {
-    
-    
+document.getElementById('form').onreset = () =>{
+    clearErrors()
 }
-
-
-
-
 
 document.getElementById('form').onsubmit= () => {
     clearErrors();
@@ -49,19 +41,15 @@ document.getElementById('form').onsubmit= () => {
             isValid = false;
         };
         
-        // let div = document.getElementById('divDropDown').value;
-
-        // if (div === "select"){
-        //     clearErrors();
-        // }
 
         return isValid;
 
     }
 
     function clearErrors()  {
-        let errors = document.getElementsByClassName("error");
+        let errors = document.getElementsByClassName("errors");
             for (let i = 0; i < errors.length; i++){
                 errors[i].style.display = "none"
             }
     }
+
