@@ -76,14 +76,6 @@ fieldset label[for="divDropdown"], legend {
     width: 20%;
     
 }
-
-#cancel-button {
-    background-color: #cc2b2b;
-    border-color: #cc2b2b;
-    padding: 10px;
-    border-radius: 4px;
-    width: 20%;
-}
 .errors{
     margin-left: 3rem;
     color: #cc2b2b;
@@ -124,3 +116,17 @@ tr:hover {
   background-color: #f1f1f1;
 }nodemon
 
+a{
+    display: inline-block;
+    background-color: rgb(50, 150, 50);
+    color: white;
+    padding: .3rem 1rem;
+    border-radius: .2rem;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 1rem 3rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+    display: block;
+    justify-self: center;
+}
