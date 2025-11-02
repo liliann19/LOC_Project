@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Page</title>
+
+    <script src="js/LOC_Project.js" defer></script>
+    <script src="//code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            new DataTable('#report-table');
+        });
+    </script>
+
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+    <main>
+    <h1>Summary Page</h1>
+    <a href="/">Division Management</a>
+
+    <table id="report-table" class="display">
+        <thead>
+            <tr>
+                <th>Division</th>
+                <th>Dean</th>
+                <th>PEN Contact</th>
+                <th>LOC Rep</th>
+                <th>Chair</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+            // divisionData 
+            for (const key in divisionData) { 
+                const div = divisionData[key]; 
+            %>
+                <tr>
+                    <td><%= div.divName %></td>
+                    <td><%= div.dean %></td>
+                    <td><%= div.penContact || 'TBD' %></td>
+                    <td><%= div.locRep %></td>
+                    <td><%= div.chair || 'TBD' %></td>
+                    <td><%= div.timestamp || '' %></td>
+                </tr>
+            <% } %>
+
+            <% 
+            // reports 
+            reports.forEach(report => { 
+            %>
+                <tr>
+                    <td><%= report.divName %></td>
+                    <td><%= report.dean %></td>
+                    <td><%= report.penContact || 'TBD' %></td>
+                    <td><%= report.locRep %></td>
+                    <td><%= report.chair || 'TBD' %></td>
+                    <td><%= report.timestamp %></td>
+
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    </main>
+</body>
+</html>

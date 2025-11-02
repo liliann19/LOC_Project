@@ -90,3 +90,17 @@ fieldset label[for="divDropdown"], legend {
     display: none;
 }
 
+a{
+    display: inline-block;
+    background-color: rgb(50, 150, 50);
+    color: white;
+    padding: .3rem 1rem;
+    border-radius: .2rem;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 1rem 3rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+    display: block;
+    justify-self: center;
+}
