@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summary Page</title>
+    <title>Summary</title>
 
     <script src="js/LOC_Project.js" defer></script>
     <script src="//code.jquery.com/jquery-3.7.1.js"></script>
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
 <body>
-    <main>
+    <main id="summary-main">
     <h1>Summary Page</h1>
     <a href="/">Division Management</a>
 
@@ -27,28 +27,45 @@
         <thead>
             <tr>
                 <th>Division</th>
+                <th>Academic Program</th>
+                <th>Division Chair</th>
                 <th>Dean</th>
-                <th>PEN Contact</th>
                 <th>LOC Rep</th>
-                <th>Chair</th>
+                <th>PEN Contact</th>
+                <th>Payee(s)</th>
+                <th>Has Been Paid (Yes/No)</th>
+                <th>Report Submitted(Yes/No)</th>
+                <th>Notes</th>
                 <th>Date</th>
+                <th>Edit</th>
+                
+                
+                
             </tr>
         </thead>
-        <tbody>
-            <% 
-            // divisionData 
-            for (const key in divisionData) { 
-                const div = divisionData[key]; 
-            %>
-                <tr>
-                    <td><%= div.divName %></td>
-                    <td><%= div.dean %></td>
-                    <td><%= div.penContact || 'TBD' %></td>
-                    <td><%= div.locRep %></td>
-                    <td><%= div.chair || 'TBD' %></td>
-                    <td><%= div.timestamp || '' %></td>
-                </tr>
-            <% } %>
+            <tbody>
+    <% 
+    Object.keys(divisionData).forEach(key => {
+        const div = divisionData[key];
+        const programs = div.programs || [];
+    %>
+        <% programs.forEach(program => { %>
+            <tr>
+                <td><%= div.divName %></td>
+                <td><%= program.academicProgram %></td>
+                <td><%= div.chair %></td>
+                <td><%= div.dean %></td>
+                <td><%= div.locRep %></td>
+                <td><%= div.penContact %></td>
+                <td><%= program.payee %></td>
+                <td><%= program.beenPaid %></td>
+                <td><%= program.submitted %></td>
+                <td><%= program.notes %></td>
+                <td><%= div.timestamp%></td>
+                <td><a href="/">Edit</a></td>
+            </tr>
+        <% }); %>
+    <% }); %>
 
             <% 
             // reports 
@@ -56,12 +73,17 @@
             %>
                 <tr>
                     <td><%= report.divName %></td>
-                    <td><%= report.dean %></td>
-                    <td><%= report.penContact || 'TBD' %></td>
-                    <td><%= report.locRep %></td>
+                    <td><%= report.academicProgram %></td>
                     <td><%= report.chair || 'TBD' %></td>
-                    <td><%= report.timestamp %></td>
-
+                    <td><%= report.dean %></td>
+                    <td><%= report.locRep %></td>
+                    <td><%= report.penContact || 'TBD' %></td>
+                    <td><%= report.payee %></td>
+                    <td><%= report.beenPaid %></td>
+                    <td><%= report.submitted %></td>
+                    <td><%= report.notes %></td>
+                    <td><%= report.timestamp || '' %></td>
+                    <td><a href="/">Edit</a></td>
                 </tr>
             <% }); %>
         </tbody>

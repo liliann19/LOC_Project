@@ -1,84 +1,131 @@
 {
   "divisionData": {
-    "fineArts": {
-      "divName": "Fine Arts",
-      "dean": "Christie Gilliland",
-      "penContact": "Liz Peterson",
-      "locRep": "Monica Bowen",
-      "chair": "Paul Metevier",
-      "timestamp": "10/21/2025"
-    },
-    "humanities": {
-      "divName": "Humanities",
-      "dean": "Jamie Fitzgerald",
-      "penContact": "Liz Peterson",
-      "locRep": "Lisa Luengo",
-      "chair": "Katie Cunnion",
-      "timestamp": "10/21/2025"
-    },
-    "socialScience": {
-      "divName": "Social Science",
-      "dean": "Christie Gilliland",
-      "penContact": "Liz Peterson",
-      "locRep": "Joy Crawford",
-      "chair": "Mark Thomason",
-      "timestamp": "10/21/2025"
-    },
-    "english": {
-      "divName": "English",
-      "dean": "Jamie Fitzgerald",
-      "penContact": "Liz Peterson",
-      "locRep": "Jake Frye",
-      "chair": "Ian Sherman",
-      "timestamp": "10/21/2025"
-    },
-    "science": {
-      "divName": "Science",
-      "dean": "Miebeth Bustillo-Booth",
-      "penContact": "Heather Lambert",
-      "locRep": "Nicole Feider",
-      "chair": "Katy Shaw and Danny Najera",
-      "timestamp": "10/21/2025"
-    },
-    "businessLawEducation": {
-      "divName": "Business, Law, and Education",
-      "dean": "Lea Ann Simpson",
-      "penContact": "Mary Singer",
-      "locRep": "Jane Swenson",
-      "chair": "Lea Ann Simpson",
-      "timestamp": "10/21/2025"
-    },
-    "technology": {
-      "divName": "Technology",
-      "dean": "Lea Ann Simpson",
-      "penContact": "Angie Brenner",
-      "locRep": "Josh Archer",
-      "chair": "Michael Wood",
-      "timestamp": "10/21/2025"
-    },
-    "healthScience": {
-      "divName": "Health Science",
-      "dean": "Lionel Candido Flores",
-      "penContact": "",
-      "locRep": "Thom Jackson",
-      "chair": "Leslie Kessler",
-      "timestamp": "10/21/2025"
-    },
-    "trades": {
-      "divName": "Trades",
-      "dean": "Lea Ann Simpson",
-      "penContact": "Mary Singer",
-      "locRep": "Ben Orr",
-      "chair": "David Lewis",
-      "timestamp": "10/21/2025"
-    },
-    "transitionalStudies": {
-      "divName": "Transitional Studies",
-      "dean": "Lionel Candido Flores",
-      "penContact": "",
-      "locRep": "Thom Jackson",
-      "chair": "",
-      "timestamp": "10/21/2025"
-    }
-  }
-}
+            "fineArts": {
+              "divName": "Fine Arts",
+              "dean": "Christie Gilliland",
+              "penContact": "Liz Peterson",
+              "locRep": "Monica Bowen",
+              "chair": "Paul Metevier",
+              "timestamp": "10/21/2025",
+              "programs":
+              [
+              {"academicProgram": "Music",
+                "payee": "--------------",
+                "beenPaid": "----------------",
+                "submitted": "--------------",
+                "notes": "-----------------"}]
+            },  
+             "socialScience":{
+              "divName": "Social Science",
+              "dean": "Christie Gilliland",
+              "penContact": "Liz Peterson",
+              "locRep": "Joy Crawford",
+              "chair": "Mark Thomason",
+              "timestamp": "10/21/2025",
+              "programs":
+              [
+              {"academicProgram": "History",
+                "payee": "--------------",
+                "beenPaid": "----------------",
+                "submitted": "--------------",
+                "notes": "-----------------"},
+
+              {"academicProgram": "Anthropology",
+                "payee": "--------------",
+                "beenPaid": "----------------",
+                "submitted": "--------------",
+                "notes": "-----------------"},
+            
+              {"academicProgram": "Political Science",          
+                "payee": "--------------",
+                "beenPaid": "----------------",
+                "submitted": "--------------",
+                "notes": "-----------------"},
+       
+              {"academicProgram": "Psychology",
+                "payee": "--------------",
+                "beenPaid": "----------------",
+                "submitted": "--------------",
+                "notes": "-----------------"
+            }
+              ]
+              
+
+            },
+            "humanities": {
+                  "divName": "Humanities",
+                  "dean": "Jamie Fitzgerald",
+                  "penContact": "Liz Peterson",
+                  "locRep": "Lisa Luengo",
+                  "chair": "Katie Cunnion",
+                  "timestamp": "10/21/2025",
+                  "programs":
+                  [
+                  {"academicProgram": "Comunication Studies",
+                    "payee": "--------------",
+                    "beenPaid": "----------------",
+                    "submitted": "--------------",
+                    "notes": "-----------------"}]
+                },
+    
+            "english": {
+                  "divName": "English",
+                  "dean": "Jamie Fitzgerald",
+                  "penContact": "Liz Peterson",
+                  "locRep": "Jake Frye",
+                  "chair": "Ian Sherman",
+                  "timestamp": "10/21/2025"
+            },
+            "science": {
+                  "divName": "Science",
+                  "dean": "Miebeth Bustillo-Booth",
+                  "penContact": "Heather Lambert",
+                  "locRep": "Nicole Feider",
+                  "chair": "Katy Shaw and Danny Najera",
+                  "timestamp": "10/21/2025"
+            },
+            "businessLawEducation": {
+                  "divName": "Business, Law, and Education",
+                  "dean": "Lea Ann Simpson",
+                  "penContact": "Mary Singer",
+                  "locRep": "Jane Swenson",
+                  "chair": "Lea Ann Simpson",
+                  "timestamp": "10/21/2025"
+            },
+            "technology": {
+                  "divName": "Technology",
+                  "dean": "Lea Ann Simpson",
+                  "penContact": "Angie Brenner",
+                  "locRep": "Josh Archer",
+                  "chair": "Michael Wood",
+                  "timestamp": "10/21/2025"
+            },
+            "healthScience": {
+                  "divName": "Health Science",
+                  "dean": "Lionel Candido Flores",
+                  "penContact": "",
+                  "locRep": "Thom Jackson",
+                  "chair": "Leslie Kessler",
+                  "timestamp": "10/21/2025"
+            },
+            "trades": {
+                  "divName": "Trades",
+                  "dean": "Lea Ann Simpson",
+                  "penContact": "Mary Singer",
+                  "locRep": "Ben Orr",
+                  "chair": "David Lewis",
+                  "timestamp": "10/21/2025"
+            },
+            "transitionalStudies": {
+                  "divName": "Transitional Studies",
+                  "dean": "Lionel Candido Flores",
+                  "penContact": "",
+                  "locRep": "Thom Jackson",
+                  "chair": "",
+                  "timestamp": "10/21/2025"
+            }
+  
+  }     
+}    
+               
+

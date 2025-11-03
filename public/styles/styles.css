@@ -11,6 +11,13 @@ main {
     padding: 2rem 2rem;
     border-radius: 8px;
 }
+#summary-main {
+    background-color: white;
+    width: 95%;
+    margin: 2rem auto;
+    padding: 2rem 2rem;
+    border-radius: 8px;
+}
 
 /* Header */
 h1 {

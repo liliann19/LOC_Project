@@ -7,9 +7,10 @@ const PORT = 3005;
 const reports = [];
 
 // reads JSON from data folder
-const divisionDataPath = path.resolve('./data/reports.json');
+const divisionDataPath = path.resolve('data/reports.json');
 const divisionDataRaw = fs.readFileSync(divisionDataPath, 'utf-8');
-const divisionData = JSON.parse(divisionDataRaw);
+const divisionData = JSON.parse(divisionDataRaw).divisionData;
+
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
 app.get('/summary', (req, res) => {
   res.render('summary', {
     reports,
-    divisionData: divisionData.divisionData, 
+    divisionData, 
   });
 //   console.log(divisionData.divisionData)
 });
@@ -36,10 +37,11 @@ app.post('/submit-report', (req, res) => {
 
   reports.push(report);
   
+  console.log(report)
 
   res.render('summary', {
     reports,
-    divisionData: divisionData.divisionData,
+    divisionData: divisionData,
   });
 });
 

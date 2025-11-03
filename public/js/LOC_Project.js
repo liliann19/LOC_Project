@@ -3,6 +3,8 @@ const divisionDropdown = document.getElementById("divDropdown");
 const divisionInfo = document.getElementById("divisionInfo");
 const buttonsContainer = document.getElementById("buttonsContainer");
 
+
+
 function displayDivisionFields() {
     divisionDropdown.addEventListener("change", function () {
         if (this.value && this.value !== "Select") {
@@ -36,6 +38,7 @@ document.getElementById("form").onsubmit = () => {
     let penContact = document.getElementById("penContact").value.trim();
     let locRep = document.getElementById("locRep").value.trim();
     let chair = document.getElementById("chair").value.trim();
+    let payee = document.getElementById("payee").value.trim();
 
     if (!divName) {
         document.getElementById("err-divName").style.display = "block";
@@ -59,6 +62,10 @@ document.getElementById("form").onsubmit = () => {
 
     if (!chair) {
         document.getElementById("err-chair").style.display = "block";
+        isValid = false;
+    }
+    if (!payee) {
+        document.getElementById("err-payee").style.display = "block";
         isValid = false;
     }
 

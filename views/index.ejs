@@ -12,7 +12,7 @@
     <h1>Division Managment </h1>
 
     <div class="summaryPage">
-        <a href="/summary">View Summary Page</a>
+        <a href="/summary">View Summary</a>
     </div>
    
 
@@ -65,6 +65,25 @@
                     <input type="text" id="chair" name="chair">
                     <span id="err-chair" class="errors"> Please fill out field </span>
                 </div>
+
+                <div class="divInfo">
+                    <label for="payee">Payee(s):</label>
+                    <input type="text" id="payee" name="payee">
+                    <span id="err-payee" class="errors"> Please fill out field </span>
+                </div>
+                <div class="divInfo">
+                    <label >Has Been Paid(Yes/No)</label>
+                    <input type="checkbox" id="beenPaid" name="beenPaid" value="Yes">
+                </div>
+                <div class="divInfo">
+                    <label >Has Report Been Submitted</label>
+                    <input type="checkbox" id="submitted" name="submitted" value="Yes">
+                </div>
+                <div>
+                    <label for="notes">Notes</label>
+                    <textarea id="notes" name="notes"></textarea>
+                </div>
+
         </fieldset>
 
         <!-- Buttons -->
