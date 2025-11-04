@@ -10,7 +10,9 @@ main {
     margin: 2rem auto;
     padding: 2rem 2rem;
     border-radius: 8px;
+    overflow-x: auto; 
 }
+
 #summary-main {
     background-color: white;
     width: 95%;
