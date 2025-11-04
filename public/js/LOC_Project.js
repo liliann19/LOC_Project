@@ -4,8 +4,6 @@ const divisionInfo = document.getElementById("divisionInfo");
 const buttonsContainer = document.getElementById("buttonsContainer");
 
 
-
-
 // get data from static json file on server
 
 let divisionData = {};
@@ -26,13 +24,7 @@ fetch('/data/reports.json')
       }
     }
 
-    // console.log('Division data loaded:', divisionData);
-    // console.log('All programs:', allPrograms);
   })
-  .catch(err => console.error('Error loading division data:', err));
-
-
-
 
 function displayDivisionFields() {
     divisionDropdown.addEventListener("change", function () {
@@ -56,50 +48,49 @@ document.getElementById("form").onreset = () => {
     clearErrors();
 };
 
+
+
+
+
 // To validate input fields and form
 document.getElementById("form").onsubmit = () => {
     clearErrors();
 
     let isValid = true;
 
-    let divName = document.getElementById("divName").value.trim();
-    let dean = document.getElementById("dean").value.trim();
-    let penContact = document.getElementById("penContact").value.trim();
-    let locRep = document.getElementById("locRep").value.trim();
-    let chair = document.getElementById("chair").value.trim();
-    let payee = document.getElementById("payee").value.trim();
+    const divName = (document.getElementById("divName")?.value || "").trim();
+    const dean = (document.getElementById("dean")?.value || "").trim();
+    const penContact = (document.getElementById("penContact")?.value || "").trim();
+    const locRep = (document.getElementById("locRep")?.value || "").trim();
+    const chair = (document.getElementById("chair")?.value || "").trim();
+
+ 
 
     if (!divName) {
         document.getElementById("err-divName").style.display = "block";
         isValid = false;
     }
-
     if (!dean) {
         document.getElementById("err-dean").style.display = "block";
         isValid = false;
     }
-
     if (!penContact) {
         document.getElementById("err-penContact").style.display = "block";
         isValid = false;
     }
-
     if (!locRep) {
         document.getElementById("err-locRep").style.display = "block";
         isValid = false;
     }
-
     if (!chair) {
         document.getElementById("err-chair").style.display = "block";
         isValid = false;
     }
-    if (!payee) {
-        document.getElementById("err-payee").style.display = "block";
-        isValid = false;
-    }
+
 
     return isValid;
 };
+
 
 // Reset validation by hiding all displayed error messages
 function clearErrors() {
@@ -111,7 +102,7 @@ function clearErrors() {
 
 // Automatically hide an input's error message once the user starts typing
 function hideErrorsInput() {
-    const inputs = document.querySelectorAll("#divName, #dean, #penContact, #locRep, #chair");
+    const inputs = document.querySelectorAll("#divName, #dean, #penContact, #locRep, #chair, #academicProgram");
 
     inputs.forEach(input => {
         input.addEventListener("input", function () {
@@ -140,11 +131,11 @@ document.getElementById("divDropdown").addEventListener("change", function () {
     const data = divisionData[selectedDivision];
 
     // When division is selected, the division fields change to populated division names
-    document.getElementById("divName").value = data.divName;
-    document.getElementById("dean").value = data.dean;
-    document.getElementById("penContact").value = data.penContact;
-    document.getElementById("locRep").value = data.locRep;
-    document.getElementById("chair").value = data.chair;
+    document.getElementById("divName").value = data.divName || "";
+    document.getElementById("dean").value = data.dean || "";
+    document.getElementById("penContact").value = data.penContact || "";
+    document.getElementById("locRep").value = data.locRep || "";
+    document.getElementById("chair").value = data.chair || "";
 });
 
 

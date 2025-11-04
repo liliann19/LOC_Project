@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Project</title>
+    <link rel="icon" type="image/png" href="/images/gator-icon.png">
     <link rel="stylesheet" href="/styles/styles.css">
+
     <script src="js/LOC_Project.js" defer></script>
 </head>
 <body>
@@ -19,70 +21,56 @@
     <form id="form" action="submit-report" method="post">
 
         <!-- Divisions -->
-        <fieldset>
-            <label for="divDropdown">Select a Division:</label><br>
-            <select id="divDropdown" name="division">
-                <option value="Select">Select a Divsion</option>
-                <option value="fineArts">Fine Arts</option>
-                <option value="humanities">Humanities</option>
-                <option value="socialScience">Social Science</option>
-                <option value="english">English</option>
-                <option value="technology">Technology</option>
-                <option value="healthScience">Health Science</option>
-                <option value="trades">Trades</option>
-            </select>
-        </fieldset>
+<fieldset>
+    <label for="divDropdown">Select a Division:</label><br>
+    <select id="divDropdown" name="divKey">
+        <option value="Select">Select a Division</option>
+        <option value="fineArts">Fine Arts</option>
+        <option value="humanities">Humanities</option>
+        <option value="socialScience">Social Science</option>
+        <option value="english">English</option>
+        <option value="technology">Technology</option>
+        <option value="healthScience">Health Science</option>
+        <option value="trades">Trades</option>
+        <option value="businessLawEducation">Business, Law, and Education</option>
+        <option value="transitionalStudies">Transitional Studies</option>
+    </select>
+</fieldset>
+
 
         <!-- Division Info -->
         <fieldset id="divisionInfo" style="display: none;">
             <legend>Division Info</legend>
                 <div class="divInfo">
                     <label for="divName">Division:</label>
-                    <input type="text" id="divName" name="divName">
-                    <span id="err-divName" class="errors"> Please fill out field </span>
+                    <input type="text" id="divName" name="divName" >
+                    <span id="err-divName" class="errors">  </span>
                 </div>
 
                 <div class="divInfo">
                     <label for="dean">Dean:</label>
                     <input type="text" id="dean" name="dean">
-                    <span id="err-dean" class="errors"> Please fill out field </span>
+                    <span id="err-dean" class="errors"> Dean cannot be blank</span>
                 </div>
 
                 <div class="divInfo">
                     <label for="penContact">PEN Contact:</label>
                     <input type="text" id="penContact" name="penContact">
-                    <span id="err-penContact" class="errors"> Please fill out field </span>
+                    <span id="err-penContact" class="errors"> PEN Contact cannot be blank</span>
                 </div>
                     
                 <div class="divInfo">
                     <label for="locRep">LOC Rep:</label>
                     <input type="text" id="locRep" name="locRep">
-                    <span id="err-locRep" class="errors"> Please fill out field </span>
+                    <span id="err-locRep" class="errors"> LOC Rep cannot be blank</span>
                 </div>        
 
                 <div class="divInfo">
                     <label for="chair">Chair:</label>
                     <input type="text" id="chair" name="chair">
-                    <span id="err-chair" class="errors"> Please fill out field </span>
+                    <span id="err-chair" class="errors"> Chair cannot be blank</span>
                 </div>
 
-                <!-- <div class="divInfo">
-                    <label for="payee">Payee(s):</label>
-                    <input type="text" id="payee" name="payee">
-                    <span id="err-payee" class="errors"> Please fill out field </span>
-                </div>
-                <div class="divInfo">
-                    <label >Has Been Paid(Yes/No)</label>
-                    <input type="checkbox" id="beenPaid" name="beenPaid" value="Yes">
-                </div>
-                <div class="divInfo">
-                    <label >Has Report Been Submitted</label>
-                    <input type="checkbox" id="submitted" name="submitted" value="Yes">
-                </div>
-                <div>
-                    <label for="notes">Notes</label>
-                    <textarea id="notes" name="notes"></textarea>
-                </div> -->
 
         </fieldset>
 

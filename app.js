@@ -4,9 +4,7 @@ import path from 'path';
 
 const app = express();
 const PORT = 3005;
-const reports = [];
-
-
+// const reports = [];
 
 
 // reads JSON from data folder
@@ -15,16 +13,14 @@ const divisionDataRaw = fs.readFileSync(divisionDataPath, 'utf-8');
 const divisionData = JSON.parse(divisionDataRaw).divisionData;
 
 
-
-
 app.use(express.static('public'));
+
+// makes json a static page on server
 app.use('/data', express.static('data'));
+
+
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
-
-
-
-
 
 
 // Home 
@@ -33,22 +29,13 @@ app.get('/', (req, res) => {
 });
 
 
-
-
-
-
 // Summary 
 app.get('/summary', (req, res) => {
   res.render('summary', {
-    reports,
+    // reports,
     divisionData, 
   });
-//   console.log(divisionData.divisionData)
 });
-
-
-
-
 
 
 // editProgram pages
@@ -56,15 +43,9 @@ app.get('/edit/:division/:index', (req, res) => {
   const { division, index } = req.params;
   const divisionData = require('./data/reports.json').divisionData;
 
-
-
-
-
   const div = divisionData[division];
-  if (!div) return res.status(404).send('Division not found');
-
   const program = div.programs[index];
-  if (!program) return res.status(404).send('Program not found');
+ 
 
   res.render('editProgram', {
     divisionKey: division,
@@ -73,22 +54,13 @@ app.get('/edit/:division/:index', (req, res) => {
     index,
   });
 
-  // console.log("test");
 });
 
 
 app.get('/editProgram', (req, res) => {
   const { divisionKey, programIndex } = req.query;
 
-  if (!divisionKey || programIndex === undefined) {
-    return res.send("Invalid program selection");
-  }
-
   const division = divisionData[divisionKey];
-  if (!division || !division.programs[programIndex]) {
-    return res.send("Program not found");
-  }
-  // console.log("test");
   const program = division.programs[programIndex];
 
   res.render('editProgram', {
@@ -103,15 +75,7 @@ app.get('/editProgram', (req, res) => {
 app.post('/editProgram', (req, res) => {
   const { divisionKey, programIndex, academicProgram, payee, beenPaid, submitted, notes } = req.body;
 
-  // validation on editProgram page
-  if (!academicProgram) {
-    return res.send("Academic Program cannot be blank.");
-  }
-
   const division = divisionData[divisionKey];
-  if (!division || !division.programs[programIndex]) {
-    return res.send("Program not found");
-  }
 
   // update program in memory
   division.programs[programIndex] = {
@@ -123,47 +87,39 @@ app.post('/editProgram', (req, res) => {
     notes
   };
 
+   division.timestamp = new Date().toLocaleDateString();
+
   // save back to JSON file
   const divisionDataPath = path.resolve('data/reports.json');
   fs.writeFileSync(divisionDataPath, JSON.stringify({ divisionData }, null, 2));
 
   console.log(`Program updated: ${academicProgram} in ${division.divName}`);
-  // console.log("test");
-  console.log("Changes");
+  console.log(division);
 
-
-
-  res.redirect('/summary'); // go to summary page
+  res.redirect('/summary'); 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // form submissions
 app.post('/submit-report', (req, res) => {
-  const report = req.body;
-  report.timestamp = new Date().toLocaleDateString();
+  const { divKey, divName, dean, penContact, locRep, chair } = req.body;
 
-  reports.push(report);
-  
-  console.log(report)
+  // only changes div level fields 
+  divisionData[divKey] = {
+    ...divisionData[divKey], 
+    divName,
+    dean,
+    penContact,
+    locRep,
+    chair,
+    timestamp: new Date().toLocaleDateString()
+  };
 
-  res.render('summary', {
-    reports,
-    divisionData: divisionData,
-  });
+  fs.writeFileSync(path.resolve('data/reports.json'), JSON.stringify({ divisionData }, null, 2));
+
+  res.redirect('/summary');
 });
+
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

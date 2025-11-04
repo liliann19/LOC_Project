@@ -6,12 +6,12 @@
       "penContact": "Liz Peterson",
       "locRep": "Monica Bowen",
       "chair": "Paul Metevier",
-      "timestamp": "10/21/2025",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "Music",
           "payee": "Sam = $333, Kelly =  = $333, Ruth = $333",
-          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025 ",
           "submitted": "--------------",
           "notes": "Yes! Sam, Kelly, and Ruth all work on this together and divide the money three ways."
         }
@@ -40,7 +40,7 @@
       "penContact": "Liz Peterson",
       "locRep": "Joy Crawford",
       "chair": "Mark Thomason",
-      "timestamp": "10/21/2025",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "History",
@@ -74,11 +74,11 @@
     },
     "english": {
       "divName": "English",
-      "dean": "Jamie Fitzgerald",
+      "dean": "Jamie Fitzgerald ",
       "penContact": "Liz Peterson",
       "locRep": "Jake Frye",
       "chair": "Ian Sherman",
-      "timestamp": "10/21/2025",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "English",
@@ -126,7 +126,7 @@
       "penContact": "Mary Singer",
       "locRep": "Jane Swenson",
       "chair": "Lea Ann Simpson",
-      "timestamp": "10/21/2025",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "Accounting",
@@ -185,10 +185,10 @@
     "healthScience": {
       "divName": "Health Science",
       "dean": "Lionel Candido Flores",
-      "penContact": "",
+      "penContact": "TBD",
       "locRep": "Thom Jackson",
       "chair": "Leslie Kessler",
-      "timestamp": "10/21/2025",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "Practical Nursing",
@@ -212,7 +212,7 @@
       "penContact": "Mary Singer",
       "locRep": "Ben Orr",
       "chair": "David Lewis",
-      "timestamp": "10/21/2025",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "Automotive Technology",
@@ -233,10 +233,10 @@
     "transitionalStudies": {
       "divName": "Transitional Studies",
       "dean": "Lionel Candido Flores",
-      "penContact": "",
+      "penContact": "TBD",
       "locRep": "Thom Jackson",
-      "chair": "",
-      "timestamp": "10/21/2025",
+      "chair": "TBD",
+      "timestamp": "11/3/2025",
       "programs": [
         {
           "academicProgram": "Health and Physical Education",
