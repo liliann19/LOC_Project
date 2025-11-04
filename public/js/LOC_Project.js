@@ -5,6 +5,35 @@ const buttonsContainer = document.getElementById("buttonsContainer");
 
 
 
+
+// get data from static json file on server
+
+let divisionData = {};
+let allPrograms = [];
+
+fetch('/data/reports.json')
+  .then(res => res.json())
+  .then(data => {
+    divisionData = data.divisionData;
+
+    for (const divisionKey in divisionData) {
+      const division = divisionData[divisionKey];
+      if (division.programs && Array.isArray(division.programs)) {
+        allPrograms.push(...division.programs.map(p => ({
+          ...p,
+          divisionName: division.divName 
+        })));
+      }
+    }
+
+    // console.log('Division data loaded:', divisionData);
+    // console.log('All programs:', allPrograms);
+  })
+  .catch(err => console.error('Error loading division data:', err));
+
+
+
+
 function displayDivisionFields() {
     divisionDropdown.addEventListener("change", function () {
         if (this.value && this.value !== "Select") {
@@ -96,79 +125,7 @@ function hideErrorsInput() {
 
 hideErrorsInput();
 
-// Populated data for each division when selected from dropdown
-const divisionData = {
-    fineArts: {
-        divName: "Fine Arts",
-        dean: "Christie Gilliland",
-        penContact: "Liz Peterson",
-        locRep: "Monica Bowen",
-        chair: "Paul Metevier"
-    },
-    humanities: {
-        divName: "Humanities",
-        dean: "Jamie Fitzgerald",
-        penContact: "Liz Peterson",
-        locRep: "Lisa Luengo",
-        chair: "Katie Cunnion"
-    },
-    socialScience: {
-        divName: "Social Science",
-        dean: "Christie Gilliland",
-        penContact: "Liz Peterson",
-        locRep: "Joy Crawford",
-        chair: "Mark Thomason"
-    },
-    english: {
-        divName: "English",
-        dean: "Jamie Fitzgerald",
-        penContact: "Liz Peterson",
-        locRep: "Jake Frye",
-        chair: "Ian Sherman"
-    },
-    science: {
-        divName: "Science",
-        dean: "Miebeth Bustillo-Booth",
-        penContact: "Heather Lambert",
-        locRep: "Nicole Feider",
-        chair: "Katy Shaw and Danny Najera"
-    },
-    businessLawEducation: {
-        divName: "Business, Law, and Education",
-        dean: "Lea Ann Simpson",
-        penContact: "Mary Singer",
-        locRep: "Jane Swenson",
-        chair: "Lea Ann Simpson"
-    },
-    technology: {
-        divName: "Technology",
-        dean: "Lea Ann Simpson",
-        penContact: "Angie Brenner",
-        locRep: "Josh Archer",
-        chair: "Michael Wood"
-    },
-    healthScience: {
-        divName: "Health Science",
-        dean: "Lionel Candido Flores",
-        penContact: "",
-        locRep: "Thom Jackson",
-        chair: "Leslie Kessler"
-    },
-    trades: {
-        divName: "Trades",
-        dean: "Lea Ann Simpson",
-        penContact: "Mary Singer",
-        locRep: "Ben Orr",
-        chair: "David Lewis"
-    },
-    transitionalStudies: {
-        divName: "Transitional Studies",
-        dean: "Lionel Candido Flores",
-        penContact: "",
-        locRep: "Thom Jackson",
-        chair: ""
-    }
-};
+
 
 // Event listener for dropdown selector change
 document.getElementById("divDropdown").addEventListener("change", function () {
@@ -189,3 +146,5 @@ document.getElementById("divDropdown").addEventListener("change", function () {
     document.getElementById("locRep").value = data.locRep;
     document.getElementById("chair").value = data.chair;
 });
+
+

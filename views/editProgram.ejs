@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Program</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+  <main>
+    <h1>Edit Program</h1>
+    <form id="edit-form" action="/editProgram" method="POST">
+        <fieldset id="editInfo">
+                <input type="hidden" name="divisionKey" value="<%= divisionKey %>">
+                <input type="hidden" name="programIndex" value="<%= programIndex %>">
+                    
+                <label>Division</label>
+                <input type="text" value="<%= division.divName %>" disabled>
+
+                <label>Academic Program *</label>
+                <input type="text" name="academicProgram" value="<%= program.academicProgram %>" required>
+
+                <label>Payee(s)</label>
+                <input type="text" name="payee" value="<%= program.payee %>">
+
+                <label>Has Been Paid</label>
+                <input type="text" name="beenPaid" value="<%= program.beenPaid %>">
+
+                <label>Report Submitted</label>
+                <input type="text" name="submitted" value="<%= program.submitted %>">
+
+                <label>Notes</label>
+                <textarea name="notes"><%= program.notes %></textarea>
+
+                <button type="submit" id="save-button">Save</button>
+                <a href="/summary" id="cancel-button">Cancel</a>
+      </fieldset>
+    </form>
+  </main>
+</body>
+</html>

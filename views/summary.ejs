@@ -43,50 +43,35 @@
                 
             </tr>
         </thead>
-            <tbody>
-    <% 
-    Object.keys(divisionData).forEach(key => {
-        const div = divisionData[key];
-        const programs = div.programs || [];
-    %>
-        <% programs.forEach(program => { %>
-            <tr>
-                <td><%= div.divName %></td>
-                <td><%= program.academicProgram %></td>
-                <td><%= div.chair %></td>
-                <td><%= div.dean %></td>
-                <td><%= div.locRep %></td>
-                <td><%= div.penContact %></td>
-                <td><%= program.payee %></td>
-                <td><%= program.beenPaid %></td>
-                <td><%= program.submitted %></td>
-                <td><%= program.notes %></td>
-                <td><%= div.timestamp%></td>
-                <td><a href="/">Edit</a></td>
-            </tr>
-        <% }); %>
-    <% }); %>
-
+            <tbody id="program-table-body">
             <% 
-            // reports 
-            reports.forEach(report => { 
+            Object.keys(divisionData).forEach(key => {
+            const div = divisionData[key];
+            const programs = div.programs || [];
             %>
-                <tr>
-                    <td><%= report.divName %></td>
-                    <td><%= report.academicProgram %></td>
-                    <td><%= report.chair || 'TBD' %></td>
-                    <td><%= report.dean %></td>
-                    <td><%= report.locRep %></td>
-                    <td><%= report.penContact || 'TBD' %></td>
-                    <td><%= report.payee %></td>
-                    <td><%= report.beenPaid %></td>
-                    <td><%= report.submitted %></td>
-                    <td><%= report.notes %></td>
-                    <td><%= report.timestamp || '' %></td>
-                    <td><a href="/">Edit</a></td>
+            <% programs.forEach((program, i) => { %>
+                <tr data-division="<%= key %>" data-index="<%= i %>">
+                <td class="division"><%= div.divName %></td>
+                <td class="academicProgram"><%= program.academicProgram %></td>
+                <td class="chair"><%= div.chair %></td>
+                <td class="dean"><%= div.dean %></td>
+                <td class="locRep"><%= div.locRep %></td>
+                <td class="penContact"><%= div.penContact %></td>
+                <td class="payee"><%= program.payee %></td>
+                <td class="beenPaid"><%= program.beenPaid %></td>
+                <td class="submitted"><%= program.submitted %></td>
+                <td class="notes"><%= program.notes %></td>
+                <td class="timestamp"><%= div.timestamp %></td>
+                <td>
+                <a href="/editProgram?divisionKey=<%= key %>&programIndex=<%= i %>">Edit</a>
+                </td>
+
+
                 </tr>
             <% }); %>
-        </tbody>
+            <% }); %>
+            </tbody>
+
     </table>
     </main>
 </body>

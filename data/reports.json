@@ -1,131 +1,251 @@
 {
   "divisionData": {
-            "fineArts": {
-              "divName": "Fine Arts",
-              "dean": "Christie Gilliland",
-              "penContact": "Liz Peterson",
-              "locRep": "Monica Bowen",
-              "chair": "Paul Metevier",
-              "timestamp": "10/21/2025",
-              "programs":
-              [
-              {"academicProgram": "Music",
-                "payee": "--------------",
-                "beenPaid": "----------------",
-                "submitted": "--------------",
-                "notes": "-----------------"}]
-            },  
-             "socialScience":{
-              "divName": "Social Science",
-              "dean": "Christie Gilliland",
-              "penContact": "Liz Peterson",
-              "locRep": "Joy Crawford",
-              "chair": "Mark Thomason",
-              "timestamp": "10/21/2025",
-              "programs":
-              [
-              {"academicProgram": "History",
-                "payee": "--------------",
-                "beenPaid": "----------------",
-                "submitted": "--------------",
-                "notes": "-----------------"},
-
-              {"academicProgram": "Anthropology",
-                "payee": "--------------",
-                "beenPaid": "----------------",
-                "submitted": "--------------",
-                "notes": "-----------------"},
-            
-              {"academicProgram": "Political Science",          
-                "payee": "--------------",
-                "beenPaid": "----------------",
-                "submitted": "--------------",
-                "notes": "-----------------"},
-       
-              {"academicProgram": "Psychology",
-                "payee": "--------------",
-                "beenPaid": "----------------",
-                "submitted": "--------------",
-                "notes": "-----------------"
-            }
-              ]
-              
-
-            },
-            "humanities": {
-                  "divName": "Humanities",
-                  "dean": "Jamie Fitzgerald",
-                  "penContact": "Liz Peterson",
-                  "locRep": "Lisa Luengo",
-                  "chair": "Katie Cunnion",
-                  "timestamp": "10/21/2025",
-                  "programs":
-                  [
-                  {"academicProgram": "Comunication Studies",
-                    "payee": "--------------",
-                    "beenPaid": "----------------",
-                    "submitted": "--------------",
-                    "notes": "-----------------"}]
-                },
-    
-            "english": {
-                  "divName": "English",
-                  "dean": "Jamie Fitzgerald",
-                  "penContact": "Liz Peterson",
-                  "locRep": "Jake Frye",
-                  "chair": "Ian Sherman",
-                  "timestamp": "10/21/2025"
-            },
-            "science": {
-                  "divName": "Science",
-                  "dean": "Miebeth Bustillo-Booth",
-                  "penContact": "Heather Lambert",
-                  "locRep": "Nicole Feider",
-                  "chair": "Katy Shaw and Danny Najera",
-                  "timestamp": "10/21/2025"
-            },
-            "businessLawEducation": {
-                  "divName": "Business, Law, and Education",
-                  "dean": "Lea Ann Simpson",
-                  "penContact": "Mary Singer",
-                  "locRep": "Jane Swenson",
-                  "chair": "Lea Ann Simpson",
-                  "timestamp": "10/21/2025"
-            },
-            "technology": {
-                  "divName": "Technology",
-                  "dean": "Lea Ann Simpson",
-                  "penContact": "Angie Brenner",
-                  "locRep": "Josh Archer",
-                  "chair": "Michael Wood",
-                  "timestamp": "10/21/2025"
-            },
-            "healthScience": {
-                  "divName": "Health Science",
-                  "dean": "Lionel Candido Flores",
-                  "penContact": "",
-                  "locRep": "Thom Jackson",
-                  "chair": "Leslie Kessler",
-                  "timestamp": "10/21/2025"
-            },
-            "trades": {
-                  "divName": "Trades",
-                  "dean": "Lea Ann Simpson",
-                  "penContact": "Mary Singer",
-                  "locRep": "Ben Orr",
-                  "chair": "David Lewis",
-                  "timestamp": "10/21/2025"
-            },
-            "transitionalStudies": {
-                  "divName": "Transitional Studies",
-                  "dean": "Lionel Candido Flores",
-                  "penContact": "",
-                  "locRep": "Thom Jackson",
-                  "chair": "",
-                  "timestamp": "10/21/2025"
-            }
-  
-  }     
-}    
-               
-
+    "fineArts": {
+      "divName": "Fine Arts",
+      "dean": "Christie Gilliland",
+      "penContact": "Liz Peterson",
+      "locRep": "Monica Bowen",
+      "chair": "Paul Metevier",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Music",
+          "payee": "Sam = $333, Kelly =  = $333, Ruth = $333",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Yes! Sam, Kelly, and Ruth all work on this together and divide the money three ways."
+        }
+      ]
+    },
+    "humanities": {
+      "divName": "Humanities",
+      "dean": "Jamie Fitzgerald",
+      "penContact": "Liz Peterson",
+      "locRep": "Lisa Luengo",
+      "chair": "Katie Cunnion",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Comunication Studies",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "No"
+        }
+      ]
+    },
+    "socialScience": {
+      "divName": "Social Science",
+      "dean": "Christie Gilliland",
+      "penContact": "Liz Peterson",
+      "locRep": "Joy Crawford",
+      "chair": "Mark Thomason",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "History",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "No for this round"
+        },
+        {
+          "academicProgram": "Anthropology",
+          "payee": "Madeleine = $500, Joy Crawford = $500",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Yes! Joy and Madeleine (Madeleine gets paid, Joy is a mentor)"
+        },
+        {
+          "academicProgram": "Political Science",
+          "payee": "Lindsey = $500, Yoav = $500",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "Submitted 6/15",
+          "notes": "Yes! Lindsey Smith and Yoav will do a project"
+        },
+        {
+          "academicProgram": "Psychology",
+          "payee": "Joy = $500, Jerry = $500",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "Submitted 6/15",
+          "notes": "Yes! Joy and Jerry will do a project together"
+        }
+      ]
+    },
+    "english": {
+      "divName": "English",
+      "dean": "Jamie Fitzgerald",
+      "penContact": "Liz Peterson",
+      "locRep": "Jake Frye",
+      "chair": "Ian Sherman",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "English",
+          "payee": "Aley Martin: $175, Claire Salcedo: $175, Ericka Nelson: $175, Jake: $475",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "Report to be completed in year #2",
+          "notes": "Yes! See notes on adjuncts to pay. Will submit report next year 2025-2026"
+        }
+      ]
+    },
+    "science": {
+      "divName": "Science",
+      "dean": "Miebeth Bustillo-Booth",
+      "penContact": "Heather Lambert",
+      "locRep": "Nicole Feider",
+      "chair": "Katy Shaw and Danny Najera",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Anatomy and Physiology",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
+        },
+        {
+          "academicProgram": "Biology/Environmental Science",
+          "payee": "$334.00 - Leo Studach",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "Report coming this summer",
+          "notes": "Yes, they are doing a 2-year project with majors level Bio classes"
+        },
+        {
+          "academicProgram": "Geology/Oceanography",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21 and 11/20"
+        }
+      ]
+    },
+    "businessLawEducation": {
+      "divName": "Business, Law, and Education",
+      "dean": "Lea Ann Simpson",
+      "penContact": "Mary Singer",
+      "locRep": "Jane Swenson",
+      "chair": "Lea Ann Simpson",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Accounting",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
+        },
+        {
+          "academicProgram": "Business Management",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
+        },
+        {
+          "academicProgram": "Business Marketing/Entrepreneurship",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
+        }
+      ]
+    },
+    "technology": {
+      "divName": "Technology",
+      "dean": "Lea Ann Simpson",
+      "penContact": "Angie Brenner",
+      "locRep": "Josh Archer",
+      "chair": "Michael Wood",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Aviation",
+          "payee": "Tad Henry = $1000",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Yes! Tad Henry is taking this on"
+        },
+        {
+          "academicProgram": "CAD Design and Engineering Tech.",
+          "payee": "Seunghye Jang = $1000",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "Yes",
+          "notes": "Yes! Seunghye Jeng"
+        },
+        {
+          "academicProgram": "Natural Resources",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Can't this year due to so many faculty in their department in the tenure process."
+        }
+      ]
+    },
+    "healthScience": {
+      "divName": "Health Science",
+      "dean": "Lionel Candido Flores",
+      "penContact": "",
+      "locRep": "Thom Jackson",
+      "chair": "Leslie Kessler",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Practical Nursing",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Not this time around"
+        },
+        {
+          "academicProgram": "Physical Therapist Assistant",
+          "payee": "Pam Kikillus = $500, Anna Neil = $500",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "Yes",
+          "notes": "Yes! Pam and Anna will do this"
+        }
+      ]
+    },
+    "trades": {
+      "divName": "Trades",
+      "dean": "Lea Ann Simpson",
+      "penContact": "Mary Singer",
+      "locRep": "Ben Orr",
+      "chair": "David Lewis",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Automotive Technology",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
+        },
+        {
+          "academicProgram": "Manufacturing",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Yes! The Manufacturing program (Bradley Chin - lead) will participate in the Program Outcomes Assessment this year"
+        }
+      ]
+    },
+    "transitionalStudies": {
+      "divName": "Transitional Studies",
+      "dean": "Lionel Candido Flores",
+      "penContact": "",
+      "locRep": "Thom Jackson",
+      "chair": "",
+      "timestamp": "10/21/2025",
+      "programs": [
+        {
+          "academicProgram": "Health and Physical Education",
+          "payee": "--------------",
+          "beenPaid": "----------------",
+          "submitted": "--------------",
+          "notes": "Not this time around"
+        }
+      ]
+    }
+  }
+}
