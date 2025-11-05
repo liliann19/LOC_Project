@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Program</title>
 
-  <!-- Favicon -->
+
   <link rel="icon" type="image/png" href="/images/gator-icon.png">
 
-  <!-- Stylesheet -->
+
   <link rel="stylesheet" href="/styles/styles.css">
 
-  <!-- Script -->
+
   <script src="/js/edit_program.js" defer ></script>
 </head>
 <body>
@@ -23,11 +23,11 @@
                 <input type="hidden" name="divisionKey" value="<%= divisionKey %>">
                 <input type="hidden" name="programIndex" value="<%= programIndex %>">
                     
-                <!-- Display Division Info -->
+        
                 <label>Division</label>
                 <input type="text" value="<%= division.divName %>" disabled>
 
-                <!-- Program Details -->
+
                 <label>Academic Program </label>
                 <input type="text" name="academicProgram" id="academicProgram" value="<%= program.academicProgram %>">
                 <span id="err-academicProgram" class="errors"> Academic Program cannot be blank</span>
@@ -35,18 +35,22 @@
                 <label>Payee(s)</label>
                 <input type="text" name="payee"  value="<%= program.payee %>">
 
+
                 <label>Has Been Paid</label>
                 <input type="text" name="beenPaid" value="<%= program.beenPaid %>">
 
                 <label>Report Submitted</label>
                 <input type="text" name="submitted" value="<%= program.submitted %>">
 
+
                 <label>Notes</label>
                 <textarea name="notes"><%= program.notes %></textarea>
+              
 
-                <!-- Buttons -->
                 <button type="submit" id="save-button">Save</button>
                 <a href="/summary" id="cancel-button">Cancel</a>
+
+
       </fieldset>
     </form>
   </main>

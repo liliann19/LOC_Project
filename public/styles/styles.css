@@ -217,3 +217,19 @@ a {
   color: white;
   margin-right: 10px;
 }
+
+#addBTN{
+  background-color: #2c882b; /* match summary green */
+  border: none;
+  color: white;
+  margin-right: 10px;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}

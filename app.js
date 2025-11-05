@@ -4,7 +4,7 @@ import path from 'path';
 
 const app = express();
 const PORT = 3005;
-// const reports = [];
+const dataPath = path.resolve('data/reports.json');
 
 // reads JSON from data folder
 const divisionDataPath = path.resolve('data/reports.json');
@@ -28,13 +28,14 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Summary 
+
+
+// summary
 app.get('/summary', (req, res) => {
-  res.render('summary', {
-    // reports,
-    divisionData, 
-  });
+  const divisionData = JSON.parse(fs.readFileSync(divisionDataPath, 'utf-8')).divisionData;
+  res.render('summary', { divisionData });
 });
+
 
 // editProgram pages (old route style)
 app.get('/edit/:division/:index', (req, res) => {
@@ -83,6 +84,7 @@ app.post('/editProgram', (req, res) => {
     notes
   };
 
+
   division.timestamp = new Date().toLocaleDateString();
 
   // save back to JSON file
@@ -94,6 +96,9 @@ app.post('/editProgram', (req, res) => {
 
   res.redirect('/summary'); 
 });
+
+
+
 
 // division form submission
 app.post('/submit-report', (req, res) => {
@@ -120,3 +125,7 @@ app.post('/submit-report', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
+
+
+
+
