@@ -28,16 +28,13 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-
-
 // summary
 app.get('/summary', (req, res) => {
   const divisionData = JSON.parse(fs.readFileSync(divisionDataPath, 'utf-8')).divisionData;
   res.render('summary', { divisionData });
 });
 
-
-// editProgram pages (old route style)
+// editProgram pages
 app.get('/edit/:division/:index', (req, res) => {
   const { division, index } = req.params;
   const divisionData = require('./data/reports.json').divisionData;
@@ -51,7 +48,6 @@ app.get('/edit/:division/:index', (req, res) => {
     program,
     index,
   });
-
 });
 
 // editProgram route using query parameters (current route)
@@ -84,7 +80,6 @@ app.post('/editProgram', (req, res) => {
     notes
   };
 
-
   division.timestamp = new Date().toLocaleDateString();
 
   // save back to JSON file
@@ -96,9 +91,6 @@ app.post('/editProgram', (req, res) => {
 
   res.redirect('/summary'); 
 });
-
-
-
 
 // division form submission
 app.post('/submit-report', (req, res) => {

@@ -1,3 +1,4 @@
+// Edit program form validation 
 document.getElementById("edit-form").onsubmit = () => {
     clearErrors();
     let isValid = true;
@@ -8,11 +9,11 @@ document.getElementById("edit-form").onsubmit = () => {
         document.getElementById("err-academicProgram").style.display = "block";
         isValid = false;
     }
- 
 
     return isValid; 
 };
 
+// Clear errors
 function clearErrors() {
     document.querySelectorAll(".errors").forEach(span => {
         span.style.display = "none";

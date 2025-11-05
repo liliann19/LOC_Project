@@ -1,4 +1,4 @@
-LOC Project - User Story #1 
+LOC Project
 
 Team Attack on the Code - Connor, Ebtisam, Lilian 
 
