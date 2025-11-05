@@ -31,7 +31,9 @@ app.get('/', (req, res) => {
 // summary
 app.get('/summary', (req, res) => {
   const divisionData = JSON.parse(fs.readFileSync(divisionDataPath, 'utf-8')).divisionData;
-  res.render('summary', { divisionData });
+  const saved = req.query.saved === 'true';
+
+  res.render('summary', { divisionData, saved });
 });
 
 // editProgram pages
@@ -89,7 +91,7 @@ app.post('/editProgram', (req, res) => {
   console.log(`Program updated: ${academicProgram} in ${division.divName}`);
   console.log(division);
 
-  res.redirect('/summary'); 
+  res.redirect('/summary?saved=true'); 
 });
 
 // division form submission
@@ -117,7 +119,3 @@ app.post('/submit-report', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
-
-
-
-

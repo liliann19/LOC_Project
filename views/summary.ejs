@@ -44,6 +44,11 @@
 <body>
     <main id="summary-main">
     <h1>Summary Page</h1>
+    <!-- Confirmation that changes were made -->
+    <% if (saved) { %>
+    <p id="save-message">Changes saved!</p>
+    <% } %>
+
     <a href="/">Division Management</a>
 
     <!-- Summary table -->

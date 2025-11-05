@@ -125,5 +125,3 @@ document.getElementById("divDropdown").addEventListener("change", function () {
     document.getElementById("locRep").value = data.locRep || "";
     document.getElementById("chair").value = data.chair || "";
 });
-
-
