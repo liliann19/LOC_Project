@@ -14,11 +14,30 @@
     <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
 
-    <script>
+    <!--  Add these two lines -->
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+
+    <!-- <script>
         document.addEventListener("DOMContentLoaded", () => {
             new DataTable('#report-table');
         });
-    </script>
+    </script> -->
+        <!-- keep all the column visible  -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        new DataTable('#report-table', {
+            responsive: true, // enable responsive behavior
+            columnDefs: [
+                { responsivePriority: 1, targets: '_all' } // show all columns, even on small screens
+            ],
+            scrollX: true
+        });
+    });
+</script>
+
+
+
 
     <link rel="stylesheet" href="/styles/styles.css">
 </head>
