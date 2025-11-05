@@ -6,28 +6,27 @@ const app = express();
 const PORT = 3005;
 // const reports = [];
 
-
 // reads JSON from data folder
 const divisionDataPath = path.resolve('data/reports.json');
 const divisionDataRaw = fs.readFileSync(divisionDataPath, 'utf-8');
 const divisionData = JSON.parse(divisionDataRaw).divisionData;
 
-
+// serve static files from public folder
 app.use(express.static('public'));
 
 // makes json a static page on server
 app.use('/data', express.static('data'));
 
-
+// set EJS as view engine
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
 
+// allow the app to parse form data (req.body)
+app.use(express.urlencoded({ extended: true }));
 
 // Home 
 app.get('/', (req, res) => {
   res.render('index');
 });
-
 
 // Summary 
 app.get('/summary', (req, res) => {
@@ -37,15 +36,13 @@ app.get('/summary', (req, res) => {
   });
 });
 
-
-// editProgram pages
+// editProgram pages (old route style)
 app.get('/edit/:division/:index', (req, res) => {
   const { division, index } = req.params;
   const divisionData = require('./data/reports.json').divisionData;
-
+  
   const div = divisionData[division];
   const program = div.programs[index];
- 
 
   res.render('editProgram', {
     divisionKey: division,
@@ -56,10 +53,9 @@ app.get('/edit/:division/:index', (req, res) => {
 
 });
 
-
+// editProgram route using query parameters (current route)
 app.get('/editProgram', (req, res) => {
   const { divisionKey, programIndex } = req.query;
-
   const division = divisionData[divisionKey];
   const program = division.programs[programIndex];
 
@@ -71,7 +67,7 @@ app.get('/editProgram', (req, res) => {
   });
 });
 
-
+// editProgram form 
 app.post('/editProgram', (req, res) => {
   const { divisionKey, programIndex, academicProgram, payee, beenPaid, submitted, notes } = req.body;
 
@@ -87,7 +83,7 @@ app.post('/editProgram', (req, res) => {
     notes
   };
 
-   division.timestamp = new Date().toLocaleDateString();
+  division.timestamp = new Date().toLocaleDateString();
 
   // save back to JSON file
   const divisionDataPath = path.resolve('data/reports.json');
@@ -99,8 +95,7 @@ app.post('/editProgram', (req, res) => {
   res.redirect('/summary'); 
 });
 
-
-// form submissions
+// division form submission
 app.post('/submit-report', (req, res) => {
   const { divKey, divName, dean, penContact, locRep, chair } = req.body;
 
@@ -115,12 +110,13 @@ app.post('/submit-report', (req, res) => {
     timestamp: new Date().toLocaleDateString()
   };
 
+  // save updated data back to JSON
   fs.writeFileSync(path.resolve('data/reports.json'), JSON.stringify({ divisionData }, null, 2));
 
   res.redirect('/summary');
 });
 
-
+// start the server and listen on the specified port 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

@@ -3,29 +3,27 @@ const divisionDropdown = document.getElementById("divDropdown");
 const divisionInfo = document.getElementById("divisionInfo");
 const buttonsContainer = document.getElementById("buttonsContainer");
 
-
 // get data from static json file on server
-
 let divisionData = {};
 let allPrograms = [];
 
 fetch('/data/reports.json')
-  .then(res => res.json())
-  .then(data => {
-    divisionData = data.divisionData;
+    .then(res => res.json())
+    .then(data => {
+        divisionData = data.divisionData;
 
     for (const divisionKey in divisionData) {
-      const division = divisionData[divisionKey];
-      if (division.programs && Array.isArray(division.programs)) {
-        allPrograms.push(...division.programs.map(p => ({
-          ...p,
-          divisionName: division.divName 
-        })));
-      }
+        const division = divisionData[divisionKey];
+        if (division.programs && Array.isArray(division.programs)) {
+            allPrograms.push(...division.programs.map(p => ({
+                ...p,
+                divisionName: division.divName 
+            })));
+        }
     }
+});
 
-  })
-
+// display / hide fields based on dropdown
 function displayDivisionFields() {
     divisionDropdown.addEventListener("change", function () {
         if (this.value && this.value !== "Select") {
@@ -48,10 +46,6 @@ document.getElementById("form").onreset = () => {
     clearErrors();
 };
 
-
-
-
-
 // To validate input fields and form
 document.getElementById("form").onsubmit = () => {
     clearErrors();
@@ -63,8 +57,6 @@ document.getElementById("form").onsubmit = () => {
     const penContact = (document.getElementById("penContact")?.value || "").trim();
     const locRep = (document.getElementById("locRep")?.value || "").trim();
     const chair = (document.getElementById("chair")?.value || "").trim();
-
- 
 
     if (!divName) {
         document.getElementById("err-divName").style.display = "block";
@@ -87,10 +79,8 @@ document.getElementById("form").onsubmit = () => {
         isValid = false;
     }
 
-
     return isValid;
 };
-
 
 // Reset validation by hiding all displayed error messages
 function clearErrors() {
@@ -115,8 +105,6 @@ function hideErrorsInput() {
 }
 
 hideErrorsInput();
-
-
 
 // Event listener for dropdown selector change
 document.getElementById("divDropdown").addEventListener("change", function () {

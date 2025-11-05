@@ -50,12 +50,12 @@ fieldset label[for="divDropdown"], legend {
     justify-self: center;
 }
 
+/* Divison Info Rows */
 .divInfo {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
 }
-
 
 .divInfo label {
     width: 120px;
@@ -63,7 +63,6 @@ fieldset label[for="divDropdown"], legend {
     margin-right: 1rem;
     font-weight: bold;
 }
-
 
 .divInfo input {
     width: 50%;
@@ -95,6 +94,8 @@ fieldset label[for="divDropdown"], legend {
     text-align: center;
     
 }
+
+/* Error Message */
 .errors{
     margin-left: 3rem;
     color: #cc2b2b;
@@ -135,7 +136,8 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
-a{
+/* Table Links */
+a {
     display: inline-block;
     background-color: rgb(50, 150, 50);
     color: white;
@@ -149,11 +151,6 @@ a{
     display: block;
     justify-self: center;
 }
-
-
-
-
-
 
 /* edit program styles */
 #edit-form {
@@ -200,6 +197,7 @@ a{
   padding: 0;
 }
 
+/* Form Buttons */
 #edit-form button#save-button,
 #edit-form a#cancel-button {
   display: inline-block;
@@ -219,9 +217,3 @@ a{
   color: white;
   margin-right: 10px;
 }
-
-
-
-
-
-
