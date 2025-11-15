@@ -82,7 +82,10 @@ fieldset label[for="divDropdown"], legend {
     padding: 10px;
     border-radius: 4px;
     width: 20%;
-    
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
 }
 
 #cancel-button {
@@ -92,7 +95,10 @@ fieldset label[for="divDropdown"], legend {
     border-radius: 4px;
     width: 20%;
     text-align: center;
-    
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
 }
 
 /* Error Message */
@@ -152,7 +158,7 @@ tr:hover {
     justify-self: center;
 }*/
 
-/* edit program styles */
+/* Edit program styles */
 #edit-form {
   max-width: 600px;
   margin: 40px auto;

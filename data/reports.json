@@ -74,7 +74,7 @@
     },
     "english": {
       "divName": "English",
-      "dean": "Jamie Fitzgerald ",
+      "dean": "Jamie Fitzgerald",
       "penContact": "Liz Peterson",
       "locRep": "Jake Frye",
       "chair": "Ian Sherman",
@@ -82,7 +82,7 @@
       "programs": [
         {
           "academicProgram": "English",
-          "payee": "Aley Martin: $175, Claire Salcedo: $175, Ericka Nelson: $175, Jake: $475",
+          "payee": " Aley Martin: $175, Claire Salcedo: $175, Ericka Nelson: $175, Jake: $475",
           "beenPaid": "Emails sent to Building Admins on 5/2/2025",
           "submitted": "Report to be completed in year #2",
           "notes": "Yes! See notes on adjuncts to pay. Will submit report next year 2025-2026"
@@ -126,8 +126,15 @@
       "penContact": "Mary Singer",
       "locRep": "Jane Swenson",
       "chair": "Lea Ann Simpson",
-      "timestamp": "11/3/2025",
+      "timestamp": "11/4/2025",
       "programs": [
+        {
+          "academicProgram": "Business Marketing/Entrepreneurship",
+          "payee": "--------------",
+          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
+          "submitted": "--------------",
+          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
+        },
         {
           "academicProgram": "Accounting",
           "payee": "--------------",
@@ -141,15 +148,9 @@
           "beenPaid": "Emails sent to Building Admins on 5/2/2025",
           "submitted": "--------------",
           "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
-        },
-        {
-          "academicProgram": "Business Marketing/Entrepreneurship",
-          "payee": "--------------",
-          "beenPaid": "Emails sent to Building Admins on 5/2/2025",
-          "submitted": "--------------",
-          "notes": "Initial Invite Sent from Julie 9/26/24. Follow up on 10/21"
         }
-      ]
+      ],
+      "divisionKey": {}
     },
     "technology": {
       "divName": "Technology",

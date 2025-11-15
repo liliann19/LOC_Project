@@ -11,23 +11,24 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/styles/styles.css">
 
-  <!-- Script -->
+  <!-- JavaScript -->
   <script src="/js/edit_program.js" defer ></script>
 </head>
+
 <body>
   <main>
     <h1>Edit Program</h1>
 
+    <!-- Edit Program form  -->
     <form id="edit-form" action="/editProgram" method="POST">
         <fieldset id="editInfo">
                 <input type="hidden" name="divisionKey" value="<%= divisionKey %>">
                 <input type="hidden" name="programIndex" value="<%= programIndex %>">
-                    
-                <!-- Display Division Info -->
+        
                 <label>Division</label>
                 <input type="text" value="<%= division.divName %>" disabled>
 
-                <!-- Program Details -->
+                <!-- Program information (editiable fields) -->
                 <label>Academic Program </label>
                 <input type="text" name="academicProgram" id="academicProgram" value="<%= program.academicProgram %>">
                 <span id="err-academicProgram" class="errors"> Academic Program cannot be blank</span>
@@ -44,7 +45,7 @@
                 <label>Notes</label>
                 <textarea name="notes"><%= program.notes %></textarea>
 
-                <!-- Buttons -->
+                <!-- Form buttons  -->
                 <button type="submit" id="save-button">Save</button>
                 <a href="/summary" id="cancel-button">Cancel</a>
       </fieldset>

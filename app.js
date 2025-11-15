@@ -4,7 +4,7 @@ import path from 'path';
 
 const app = express();
 const PORT = 3005;
-// const reports = [];
+const dataPath = path.resolve('data/reports.json');
 
 // reads JSON from data folder
 const divisionDataPath = path.resolve('data/reports.json');
@@ -28,12 +28,12 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Summary 
+// summary
 app.get('/summary', (req, res) => {
-  res.render('summary', {
-    // reports,
-    divisionData, 
-  });
+  const divisionData = JSON.parse(fs.readFileSync(divisionDataPath, 'utf-8')).divisionData;
+  const saved = req.query.saved === 'true';
+
+  res.render('summary', { divisionData, saved });
 });
 
 // to be chandged 
@@ -56,7 +56,6 @@ app.get('/edit/:division/:index', (req, res) => {
     program,
     index,
   });
-
 });
 
 // editProgram route using query parameters (current route)
@@ -98,7 +97,7 @@ app.post('/editProgram', (req, res) => {
   console.log(`Program updated: ${academicProgram} in ${division.divName}`);
   console.log(division);
 
-  res.redirect('/summary'); 
+  res.redirect('/summary?saved=true'); 
 });
 
 // division form submission
