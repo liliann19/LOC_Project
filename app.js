@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Home 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('dashboard',{ divisionData });
 });
 
 // summary
