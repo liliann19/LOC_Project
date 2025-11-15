@@ -36,6 +36,12 @@ app.get('/summary', (req, res) => {
   });
 });
 
+// to be chandged 
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard', { divisionData });
+});
+
+
 // editProgram pages (old route style)
 app.get('/edit/:division/:index', (req, res) => {
   const { division, index } = req.params;

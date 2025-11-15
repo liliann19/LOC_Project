@@ -4,14 +4,14 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-main {
+/*main {
     background-color: white;
     width: 60%;
     margin: 2rem auto;
     padding: 2rem 2rem;
     border-radius: 8px;
     overflow-x: auto; 
-}
+}*/
 
 #summary-main {
     background-color: white;
@@ -137,7 +137,7 @@ tr:hover {
 }
 
 /* Table Links */
-a {
+/*a {
     display: inline-block;
     background-color: rgb(50, 150, 50);
     color: white;
@@ -150,7 +150,7 @@ a {
     transition: background-color 0.2s ease;
     display: block;
     justify-self: center;
-}
+}*/
 
 /* edit program styles */
 #edit-form {
@@ -216,4 +216,133 @@ a {
   border: none;
   color: white;
   margin-right: 10px;
+}
+
+
+/*to be changed*/
+
+
+/* Main container: Sidebar */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 220px 1fr 300px;
+  gap: 20px;
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f5f6f7;
+}
+
+/* SIDEBAR */
+.sidebar {
+  background-color: #0A3A8D; /* dark blue */
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  min-height: 100vh;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* SIDEBAR ITEMS (Division list) */
+.division-item {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.division-item:hover {
+  background-color: #1e5dcc; /* lighter hover */
+}
+
+.division-item.active {
+  background-color: #ffffff44; /* soft white transparency */
+  font-weight: bold;
+}
+
+/* MAIN CONTENT AREA */
+.dashboard-main {
+  padding-right: 20px;
+}
+
+.page-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* CONTENT LAYOUT — table on left, activity panel on right */
+.content-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+}
+
+/* CARD STYLE — white rounded boxes */
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+}
+
+/* TABLE STYLES INSIDE CARD */
+.table-card table {
+  width: 100%;
+}
+
+/* SAVE BUTTON STYLE */
+.save-btn {
+  background-color: #22c55e;
+  color: white;
+  padding: 6px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: #16a34a;
+}
+
+/* RIGHT PANEL — Recent Changes */
+.activity-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.activity-card h2 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Activity feed items */
+.activity-list li {
+  margin-bottom: 10px;
+  padding-left: 22px;
+  position: relative;
+}
+
+/* green check icon */
+.activity-list li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #22c55e;
+  font-weight: bold;
 }
