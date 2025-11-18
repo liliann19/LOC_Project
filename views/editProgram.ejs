@@ -20,34 +20,45 @@
     <h1>Edit Program</h1>
 
     <!-- Edit Program form  -->
-    <form id="edit-form" action="/editProgram" method="POST">
+    <form id="edit-form" action="/editProgram/<%= data.id %>" method="POST">
+
         <fieldset id="editInfo">
-                <input type="hidden" name="divisionKey" value="<%= divisionKey %>">
-                <input type="hidden" name="programIndex" value="<%= programIndex %>">
-        
-                <label>Division</label>
-                <input type="text" value="<%= division.divName %>" disabled>
 
-                <!-- Program information (editiable fields) -->
-                <label>Academic Program </label>
-                <input type="text" name="academicProgram" id="academicProgram" value="<%= program.academicProgram %>">
-                <span id="err-academicProgram" class="errors"> Academic Program cannot be blank</span>
+        <input type="hidden" name="id" value="<%= data.id %>">
 
-                <label>Payee(s)</label>
-                <input type="text" name="payee"  value="<%= program.payee %>">
+        <label>Division</label>
+        <input type="text" name="divName" value="<%= data.divName %>" readonly>
 
-                <label>Has Been Paid</label>
-                <input type="text" name="beenPaid" value="<%= program.beenPaid %>">
 
-                <label>Report Submitted</label>
-                <input type="text" name="submitted" value="<%= program.submitted %>">
+        <label>Academic Program</label>
+        <input type="text" name="academicProgram" id="academicProgram" value="<%= data.academicProgram %>">
 
-                <label>Notes</label>
-                <textarea name="notes"><%= program.notes %></textarea>
+        <label>Payee(s)</label>
+        <input type="text" name="payee" value="<%= data.payee %>">
+
+        <label>Has Been Paid</label>
+        <input type="text" name="beenPaid" value="<%= data.beenPaid %>">
+
+        <label>Report Submitted</label>
+        <input type="text" name="submitted" value="<%= data.submitted %>">
+
+        <label>Notes</label>
+        <textarea name="notes"><%= data.notes %></textarea>
+
+        <label>
+          <input type="checkbox" name="underReview" value="yes" 
+            <%= data.underReview === 'yes' ? 'checked' : '' %> >
+          Under Review
+        </label>
+
+
+        <label>Last Updated</label>
+        <input type="text" value="<%= data.timestamp %>" disabled>
+
 
                 <!-- Form buttons  -->
                 <button type="submit" id="save-button">Save</button>
-                <a href="/summary" id="cancel-button">Cancel</a>
+                <a href="/" id="cancel-button">Cancel</a>
       </fieldset>
     </form>
   </main>

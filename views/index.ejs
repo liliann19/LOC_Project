@@ -3,86 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client Project</title>
-
-    <!-- Favicon -->
+    <title>Division Management</title>
     <link rel="icon" type="image/png" href="/images/gator-icon.png">
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="/styles/styles.css">
-
-    <!-- JavaScript -->
     <script src="js/LOC_Project.js" defer></script>
-    
 </head>
 <body>
     <main>
-    <h1>Division Managment </h1>
+        <h1>Division Management</h1>
 
-    <div class="summaryPage">
-        <a href="/summary">View Summary</a>
-    </div>
-
-    <form id="form" action="submit-report" method="post">
-
-    <!-- Divisions -->
-    <fieldset>
-        <label for="divDropdown">Select a Division:</label><br>
-        <select id="divDropdown" name="divKey">
-            <option value="Select">Select a Division</option>
-            <option value="fineArts">Fine Arts</option>
-            <option value="humanities">Humanities</option>
-            <option value="socialScience">Social Science</option>
-            <option value="english">English</option>
-            <option value="technology">Technology</option>
-            <option value="healthScience">Health Science</option>
-            <option value="trades">Trades</option>
-            <option value="businessLawEducation">Business, Law, and Education</option>
-            <option value="transitionalStudies">Transitional Studies</option>
-        </select>
-    </fieldset>
-
-    <!-- Division Info -->
-    <fieldset id="divisionInfo" style="display: none;">
-        <legend>Division Info</legend>
-            <div class="divInfo">
-                <label for="divName">Division:</label>
-                <input type="text" id="divName" name="divName" >
-                <span id="err-divName" class="errors">  </span>
-            </div>
-
-            <div class="divInfo">
-                <label for="dean">Dean:</label>
-                <input type="text" id="dean" name="dean">
-                <span id="err-dean" class="errors"> Dean cannot be blank</span>
-            </div>
-
-            <div class="divInfo">
-                <label for="penContact">PEN Contact:</label>
-                <input type="text" id="penContact" name="penContact">
-                <span id="err-penContact" class="errors"> PEN Contact cannot be blank</span>
-            </div>
-
-            <div class="divInfo">
-                <label for="locRep">LOC Rep:</label>
-                <input type="text" id="locRep" name="locRep">
-                <span id="err-locRep" class="errors"> LOC Rep cannot be blank</span>
-            </div>        
-
-            <div class="divInfo">
-                <label for="chair">Chair:</label>
-                <input type="text" id="chair" name="chair">
-                <span id="err-chair" class="errors"> Chair cannot be blank</span>
-            </div>
-        </fieldset>
-
-        <!-- Buttons -->
-        <div class="button-container" id="buttonsContainer" style="display:none;">
-            <button type="submit" id="save-button">Save</button>
-            <button type="reset" id="cancel-button">Cancel</button>
-            
+        <div class="summaryPage">
+            <a href="/">Back to Dashboard</a>
         </div>
-    </form>
+
+        <form id="form" action="/submit-report" method="post">
+            <!-- Hidden ID -->
+            <input type="hidden" name="id" id="divisionId" value="<%= data?.id || '' %>">
+
+            <!-- Dropdown -->
+            <select id="divDropdown" name="divisionKey">
+                <option value="">Select a Division</option>
+                <% 
+                    const uniqueDivisions = {};
+                    data.forEach(row => {
+                        if (!uniqueDivisions[row.divisionKey]) {
+                            uniqueDivisions[row.divisionKey] = row.divName;
+                        }
+                    });
+
+                    Object.keys(uniqueDivisions).forEach(key => { 
+                %>
+                    <option value="<%= key %>"><%= uniqueDivisions[key] %></option>
+                <% }) %>
+            </select>
+
+        
+            <fieldset id="divisionInfo" style="display:none;">
+                <label>Division:</label>
+                <input id="divName" type="text" name="divName" value="">
+                
+                <label>Dean:</label>
+                <input id="dean" type="text" name="dean" value="">
+                
+                <label>PEN Contact:</label>
+                <input id="penContact" type="text" name="penContact" value="">
+                
+                <label>LOC Rep:</label>
+                <input id="locRep" type="text" name="locRep" value="">
+                
+                <label>Chair:</label>
+                <input id="chair" type="text" name="chair" value="">
+            </fieldset>
+
+            <div id="buttonsContainer" style="display:none;">
+                <button type="submit" id="save-button">Save</button>
+                <button type="reset" id="cancel-button">Cancel</button>
+            </div>
+        </form>
+
+        
+        <aside class="activity-panel">
+            <h2>Recent Changes</h2>
+            <ul>
+                <% recentChanges.forEach(change => { %>
+                    <li>
+                        <strong><%= change.divName %></strong> - <%= change.academicProgram %> (<%= change.timestamp %>)
+                    </li>
+                <% }) %>
+            </ul>
+        </aside>
     </main>
 </body>
 </html>

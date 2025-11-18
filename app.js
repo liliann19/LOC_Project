@@ -1,127 +1,224 @@
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
+import mysql2 from "mysql2";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
+
+const pool = mysql2.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
+}).promise();
+
+
 const PORT = 3005;
-const dataPath = path.resolve('data/reports.json');
 
-// reads JSON from data folder
-const divisionDataPath = path.resolve('data/reports.json');
-const divisionDataRaw = fs.readFileSync(divisionDataPath, 'utf-8');
-const divisionData = JSON.parse(divisionDataRaw).divisionData;
 
-// serve static files from public folder
 app.use(express.static('public'));
 
-// makes json a static page on server
-app.use('/data', express.static('data'));
 
-// set EJS as view engine
 app.set('view engine', 'ejs');
 
-// allow the app to parse form data (req.body)
+
 app.use(express.urlencoded({ extended: true }));
 
-// Home 
-app.get('/', (req, res) => {
-  res.render('dashboard',{ divisionData });
-});
-
-// summary
-app.get('/summary', (req, res) => {
-  const divisionData = JSON.parse(fs.readFileSync(divisionDataPath, 'utf-8')).divisionData;
-  const saved = req.query.saved === 'true';
-
-  res.render('summary', { divisionData, saved });
-});
-
-// to be chandged 
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard', { divisionData });
-});
-
-
-// editProgram pages (old route style)
-app.get('/edit/:division/:index', (req, res) => {
-  const { division, index } = req.params;
-  const divisionData = require('./data/reports.json').divisionData;
+//Wa timezone
+function convertToPacificTime(mysqlTimestamp) {
+    if (!mysqlTimestamp) return '';
+    const date = new Date(mysqlTimestamp + 'Z'); 
   
-  const div = divisionData[division];
-  const program = div.programs[index];
+    const pacificOffset = -8; 
+    
+    return date.toLocaleString("en-US", { 
+        timeZone: "America/Los_Angeles",
+        hour12: true,
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+    });
+}
 
-  res.render('editProgram', {
-    divisionKey: division,
-    division: div,
-    program,
-    index,
-  });
+
+// Dashboard
+app.get('/', async (req, res) => {
+  const [underReviewPrograms] = await pool.query(
+  `SELECT academicProgram, divName FROM division_programs WHERE underReview = 'yes' ORDER BY divName`
+);
+
+
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM division_programs ORDER BY divName, academicProgram'
+        );
+
+        rows.forEach(row => {
+            row.timestamp = convertToPacificTime(row.timestamp);
+        });
+
+        const [recentChanges] = await pool.query(
+            'SELECT divName, academicProgram, timestamp FROM division_programs ORDER BY timestamp DESC LIMIT 5'
+        );
+
+        recentChanges.forEach(row => {
+            row.timestamp = convertToPacificTime(row.timestamp);
+        });
+
+        res.render('dashboard', { data: rows, recentChanges, underReviewPrograms });
+
+
+    } catch (err) {
+        console.error('Database Error:', err);
+        res.status(500).send('Database error');
+    }
 });
 
-// editProgram route using query parameters (current route)
-app.get('/editProgram', (req, res) => {
-  const { divisionKey, programIndex } = req.query;
-  const division = divisionData[divisionKey];
-  const program = division.programs[programIndex];
+// Divsion management 
+app.get('/index', async (req, res) => {
+    try {
+        const [rows] = await pool.query(
+            'SELECT * FROM division_programs ORDER BY divName, academicProgram'
+        );
 
-  res.render('editProgram', {
-    divisionKey,
-    programIndex,
-    division,
-    program
-  });
+        rows.forEach(row => {
+            row.timestamp = convertToPacificTime(row.timestamp);
+        });
+
+        const [recentChanges] = await pool.query(
+            'SELECT divName, academicProgram, timestamp FROM division_programs ORDER BY timestamp DESC LIMIT 5'
+        );
+
+        recentChanges.forEach(row => {
+            row.timestamp = convertToPacificTime(row.timestamp);
+        });
+
+        res.render('index', { 
+            data: rows, 
+            recentChanges,
+            query: req.query 
+        });
+
+    } catch (err) {
+        console.error('Database Error:', err);
+        res.status(500).send('Database error');
+    }
 });
 
-// editProgram form 
-app.post('/editProgram', (req, res) => {
-  const { divisionKey, programIndex, academicProgram, payee, beenPaid, submitted, notes } = req.body;
+// Looks up Div infor through SQL
+app.get('/api/division/:divisionKey', async (req, res) => {
+    try {
+        const key = req.params.divisionKey;
 
-  const division = divisionData[divisionKey];
+        const [rows] = await pool.query(
+            'SELECT * FROM division_programs WHERE divisionKey = ? LIMIT 1',
+            [key]
+        );
 
-  // update program in memory
-  division.programs[programIndex] = {
-    ...division.programs[programIndex],
-    academicProgram,
-    payee,
-    beenPaid,
-    submitted,
-    notes
-  };
-
-  division.timestamp = new Date().toLocaleDateString();
-
-  // save back to JSON file
-  const divisionDataPath = path.resolve('data/reports.json');
-  fs.writeFileSync(divisionDataPath, JSON.stringify({ divisionData }, null, 2));
-
-  console.log(`Program updated: ${academicProgram} in ${division.divName}`);
-  console.log(division);
-
-  res.redirect('/summary?saved=true'); 
+        res.json(rows);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
+    }
 });
 
-// division form submission
-app.post('/submit-report', (req, res) => {
-  const { divKey, divName, dean, penContact, locRep, chair } = req.body;
+// GET programs 
+app.get('/editProgram', async (req, res) => {
+    try {
+        const programId = req.query.id;
 
-  // only changes div level fields 
-  divisionData[divKey] = {
-    ...divisionData[divKey], 
-    divName,
-    dean,
-    penContact,
-    locRep,
-    chair,
-    timestamp: new Date().toLocaleDateString()
-  };
+        if (!programId) {
+            return res.status(400).send("Error: No program ID provided.");
+        }
 
-  // save updated data back to JSON
-  fs.writeFileSync(path.resolve('data/reports.json'), JSON.stringify({ divisionData }, null, 2));
+        const [rows] = await pool.query(
+            'SELECT * FROM division_programs WHERE id = ?',
+            [programId]
+        );
 
-  res.redirect('/summary');
+        if (rows.length === 0) {
+            return res.status(404).send("Program not found.");
+        }
+
+        const program = rows[0];
+        program.timestamp = convertToPacificTime(program.timestamp);
+
+        res.render('editProgram', { data: program });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
 });
 
-// start the server and listen on the specified port 
+// Save programs
+app.post('/editProgram/:id', async (req, res) => {
+    const id = req.params.id;
+    const underReview = req.body.underReview === 'yes' ? 'yes' : 'no';
+
+    const {
+        divName,
+        academicProgram,
+        payee,
+        beenPaid,
+        submitted,
+        notes
+    } = req.body;
+
+    try {
+        await pool.execute(
+          `UPDATE division_programs
+          SET divName = ?, academicProgram = ?, payee = ?, beenPaid = ?, 
+              submitted = ?, notes = ?, underReview = ?, timestamp = NOW()
+          WHERE id = ?`,
+          [
+            divName || "",
+            academicProgram || "",
+            payee || "",
+            beenPaid || "",
+            submitted || "",
+            notes || "",
+            underReview,
+            id
+          ]
+        );
+
+        res.redirect('/');
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error updating program');
+    }
+});
+
+//POST divsion 
+app.post('/submit-report', async (req, res) => {
+    try {
+        const { divisionKey, divName, dean, penContact, locRep, chair } = req.body;
+
+ 
+        await pool.execute(
+            `UPDATE division_programs
+             SET divName = ?, dean = ?, penContact = ?, locRep = ?, chair = ?, timestamp = NOW()
+             WHERE divisionKey = ?`,
+            [divName, dean, penContact, locRep, chair, divisionKey]
+        );
+
+       
+        res.redirect('/index?divisionKey=' + divisionKey);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error saving division info');
+    }
+});
+
+
+
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
