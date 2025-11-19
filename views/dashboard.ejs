@@ -50,7 +50,12 @@
     <a href="/index" class="home-btn">⬅Division Management</a>
   </aside>
 
-  <!-- MAIN ------------------------->
+  
+  
+
+
+
+
   <main class="dashboard-main">
 <div class="card under-review-card">
   <h3>To Do: Programs currently under review</h3>
@@ -103,7 +108,7 @@
       </div>
     </div>
 
-    <!-- RIGHT PANEL ------------------------->
+    
     <aside class="activity-card">
       <h2>Recent Changes</h2>
 
@@ -126,7 +131,7 @@
 
 </div>
 
-<!-- JAVASCRIPT ------------------------------>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -152,6 +157,37 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+</script>
+
+<!-- SUCCESS POPUP HTML -->
+<div id="popup" class="popup hidden">
+  <p id="popupMessage"></p>
+</div>
+
+<script>
+// SUCCESS POPUP FUNCTION
+function showPopup(message) {
+  const popup = document.getElementById("popup");
+  const messageElement = document.getElementById("popupMessage");
+
+  messageElement.textContent = message;
+
+  popup.classList.remove("hidden");
+  setTimeout(() => popup.classList.add("show"), 10);
+
+  setTimeout(() => {
+      popup.classList.remove("show");
+      setTimeout(() => popup.classList.add("hidden"), 300);
+  }, 8000);
+}
+</script>
+
+<script>
+// DETECT SERVER REDIRECT SUCCESS FLAG
+const params = new URLSearchParams(window.location.search);
+if (params.get('success') === 'programSaved') {
+    showPopup("Program saved successfully!");
+}
 </script>
 
 </body>
