@@ -202,7 +202,7 @@ app.post('/editProgram/:id', async (req, res) => {
 
        // res.redirect('/');
        //can be changed
-       setTimeout( () => {res.redirect('/?success=programSaved'); }, 2000);
+       setTimeout( () => {res.redirect('/'); }, 2000);
 
 
     } catch (err) {
