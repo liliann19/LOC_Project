@@ -74,5 +74,18 @@
             </ul>
         </aside>
     </main>
+    
+    <div id="popup" class="popup hidden">
+    <p id="popupMessage"></p>
+    </div>
+
+    <script>
+  const params = new URLSearchParams(window.location.search);
+
+  if (params.get('success') === 'divisionSaved') {
+      showPopup("Division saved successfully!");
+  }
+</script>
+
 </body>
 </html>
