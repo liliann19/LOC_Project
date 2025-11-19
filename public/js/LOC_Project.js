@@ -1,5 +1,5 @@
 const divisionDropdown = document.getElementById("divDropdown");
-const divisionInfo = document.getElementById("divisionInfo");
+const divisionInfo = document.getElementById("editInfo");
 const buttonsContainer = document.getElementById("buttonsContainer");
 
 // Get data from sql
@@ -35,8 +35,9 @@ divisionDropdown.addEventListener("change", async function () {
     }
 });
 
-document.getElementById("form").onreset = () => {
+document.getElementById("edit-form").onreset = () => {
     divisionInfo.style.display = "none";
     buttonsContainer.style.display = "none";
     divisionDropdown.value = "";
 };
+
