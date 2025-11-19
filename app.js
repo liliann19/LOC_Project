@@ -164,19 +164,10 @@ app.get('/editProgram', async (req, res) => {
     }
 });
 
-
+// POST edit programs
 app.post('/editProgram/:id', async (req, res) => {
     const id = req.params.id;
     const underReview = req.body.underReview === 'yes' ? 'yes' : 'no';
-
-    const {
-        divisionKey,
-        academicProgram,
-        payee,
-        beenPaid,
-        submitted,
-        notes
-    } = req.body;
 
     try {
             const { divisionKey, academicProgram, payee, beenPaid, submitted, notes } = req.body;
@@ -187,6 +178,8 @@ app.post('/editProgram/:id', async (req, res) => {
                 [divisionKey]
             );
             const divName = div ? div.divName : ""; 
+            console.log(divName);
+            console.log(divisionKey);
 
             await pool.execute(
                 `UPDATE division_programs

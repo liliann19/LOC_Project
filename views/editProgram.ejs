@@ -29,7 +29,7 @@
         <label>Division</label>
         <select name="divisionKey">
           <% divisions.forEach(div => { %>
-            <option value="<%= div.divisionKey %>" 
+            <option value="<%= div.divisionKey, div.divName %>" 
               <%= data.divisionKey === div.divisionKey ? "selected" : "" %>>
               <%= div.divName %>
             </option>
