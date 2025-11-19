@@ -278,12 +278,10 @@ tr:hover {
 
 .division-item:hover {
   background-color: #16a34a;
-  /* lighter hover */
 }
 
 .division-item.active {
   background-color: #ffffff44;
-  /* soft white transparency */
   font-weight: bold;
 }
 
@@ -428,7 +426,6 @@ main .activity-panel h2 {
   margin-top: 20px;
   background-color: #ffffff;
   color: #1d7c3c;
-  /* your green accent */
   padding: 12px 16px;
   text-decoration: none;
   border-radius: 8px;
@@ -447,21 +444,22 @@ main .activity-panel h2 {
 
 /* Edit button in table */
 #dashboard-table td a {
-    display: inline-block;
-    padding: 4px 10px;
-    background-color: #2c882b;   
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    text-align: center;
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #2c882b;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  text-align: center;
 }
 
 #dashboard-table td a:hover {
-    background-color: #1f5f1f;  
-    transform: translateY(-1px); 
+  background-color: #1f5f1f;
+  transform: translateY(-1px);
 }
+
 /* SUCCESS POPUP */
 .popup {
   position: fixed;
@@ -473,7 +471,7 @@ main .activity-panel h2 {
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity .3s ease, transform .3s ease;
@@ -488,4 +486,3 @@ main .activity-panel h2 {
 .popup.hidden {
   display: none;
 }
-

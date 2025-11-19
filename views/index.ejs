@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="/styles/styles.css">
     <script src="js/LOC_Project.js" defer></script>
 </head>
+
 <body>
     <main>
         <h1>Division Management</h1>
@@ -24,21 +26,21 @@
             <label for="divDropdown">Select Division</label>
             <select id="divDropdown" name="divisionKey">
                 <option value="">Select a Division</option>
-                <% 
-                    const uniqueDivisions = {};
-                    data.forEach(row => {
-                        if (!uniqueDivisions[row.divisionKey]) {
-                            uniqueDivisions[row.divisionKey] = row.divName;
-                        }
+                <% const uniqueDivisions={}; data.forEach(row=> {
+                    if (!uniqueDivisions[row.divisionKey]) {
+                    uniqueDivisions[row.divisionKey] = row.divName;
+                    }
                     });
 
-                    Object.keys(uniqueDivisions).forEach(key => { 
-                %>
-                    <option value="<%= key %>"><%= uniqueDivisions[key] %></option>
-                <% }) %>
+                    Object.keys(uniqueDivisions).forEach(key => {
+                    %>
+                    <option value="<%= key %>">
+                        <%= uniqueDivisions[key] %>
+                    </option>
+                    <% }) %>
             </select>
 
-        
+
             <fieldset id="editInfo" style="display:none;">
                 <label>Division:</label>
                 <input id="divName" type="text" name="divName" value="" readonly>
@@ -52,12 +54,12 @@
                 <input id="penContact" type="text" name="penContact" value="">
                 <span id="err-penContact" class="errors"> Fill missing field or put TBD </span>
 
-                
+
                 <label>LOC Rep:</label>
                 <input id="locRep" type="text" name="locRep" value="">
                 <span id="err-locRep" class="errors"> Fill missing field or put TBD</span>
 
-                
+
                 <label>Chair:</label>
                 <input id="chair" type="text" name="chair" value="">
                 <span id="err-chair" class="errors"> Fill missing field or put TBD </span>
@@ -70,30 +72,32 @@
             </div>
         </form>
 
-        
+
         <aside class="activity-panel">
             <h2>Recent Changes</h2>
             <ul>
-                <% recentChanges.forEach(change => { %>
+                <% recentChanges.forEach(change=> { %>
                     <li>
-                        <strong><%= change.divName %></strong> - <%= change.academicProgram %> (<%= change.timestamp %>)
+                        <strong>
+                            <%= change.divName %>
+                        </strong> - <%= change.academicProgram %> (<%= change.timestamp %>)
                     </li>
-                <% }) %>
+                    <% }) %>
             </ul>
         </aside>
     </main>
-    
+
     <div id="popup" class="popup hidden">
-    <p id="popupMessage"></p>
+        <p id="popupMessage"></p>
     </div>
 
     <script>
-  const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search);
 
-  if (params.get('success') === 'divisionSaved') {
-      showPopup("Division saved successfully!");
-  }
-</script>
+        if (params.get('success') === 'divisionSaved') {
+            showPopup("Division saved successfully!");
+        }
+    </script>
 
 </body>
 </html>

@@ -1,22 +1,18 @@
-
 // Success Popup Function
 function showPopup(message) {
-  const popup = document.getElementById("popup");
-  const messageElement = document.getElementById("popupMessage");
+    const popup = document.getElementById("popup");
+    const messageElement = document.getElementById("popupMessage");
 
-  messageElement.textContent = message;
+    messageElement.textContent = message;
 
-  popup.classList.remove("hidden");
-  setTimeout(() => popup.classList.add("show"), .5);
+    popup.classList.remove("hidden");
+    setTimeout(() => popup.classList.add("show"), .5);
 
-  setTimeout(() => {
-    popup.classList.remove("show");
-    setTimeout(() => popup.classList.add("hidden"), 50000000000);
-  }, 800000000000);
+    setTimeout(() => {
+        popup.classList.remove("show");
+        setTimeout(() => popup.classList.add("hidden"), 50000000000);
+    }, 800000000000);
 }
-
-
-
 
 const divisionDropdown = document.getElementById("divDropdown");
 const divisionInfo = document.getElementById("editInfo");
@@ -30,7 +26,6 @@ async function loadDivisionFromSQL(divKey) {
     const rows = await res.json();
     return rows[0] || null;
 }
-
 
 divisionDropdown.addEventListener("change", async function () {
     const selectedKey = this.value;
@@ -62,6 +57,7 @@ document.getElementById("edit-form").onreset = () => {
 
     showPopup("Changes canceled");
 };
+
 //save button
 // Validation logic
 document.getElementById("edit-form").onsubmit = () => {
@@ -94,7 +90,7 @@ document.getElementById("edit-form").onsubmit = () => {
         document.getElementById("err-chair").style.display = "block";
         isValid = false;
     }
-    if (isValid){
+    if (isValid) {
         showPopup("Division saved successfully!");
     }
 
