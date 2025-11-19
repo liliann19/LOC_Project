@@ -200,7 +200,10 @@ app.post('/editProgram/:id', async (req, res) => {
             );
 
 
-        res.redirect('/');
+       // res.redirect('/');
+       //can be changed
+       res.redirect('/?success=programSaved');
+
 
     } catch (err) {
         console.error(err);
@@ -223,7 +226,7 @@ app.post('/submit-report', async (req, res) => {
         );
 
        
-        res.redirect('/');
+        res.redirect('/index?divisionKey=' + divisionKey + '&success=divisionSaved');
 
     } catch (err) {
         console.error(err);
