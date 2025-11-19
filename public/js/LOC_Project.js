@@ -63,9 +63,70 @@ document.getElementById("edit-form").onreset = () => {
     showPopup("Changes canceled");
 };
 //save button
-//can be changed
+// Validation logic
 document.getElementById("edit-form").onsubmit = () => {
-    showPopup("Division saved successfully!");
-    
+    clearErrors();
+    let isValid = true;
+
+    const divName = document.getElementById("divName").value.trim();
+    const dean = document.getElementById("dean").value.trim();
+    const penContact = document.getElementById("penContact").value.trim();
+    const locRep = document.getElementById("locRep").value.trim();
+    const chair = document.getElementById("chair").value.trim();
+
+    if (!divName) {
+        document.getElementById("err-divName").style.display = "block";
+        isValid = false;
+    }
+    if (!dean) {
+        document.getElementById("err-dean").style.display = "block";
+        isValid = false;
+    }
+    if (!penContact) {
+        document.getElementById("err-penContact").style.display = "block";
+        isValid = false;
+    }
+    if (!locRep) {
+        document.getElementById("err-locRep").style.display = "block";
+        isValid = false;
+    }
+    if (!chair) {
+        document.getElementById("err-chair").style.display = "block";
+        isValid = false;
+    }
+    if (isValid){
+        showPopup("Division saved successfully!");
+    }
+
+    return isValid;
 };
 
+// Hide errors when typing
+function hideErrorsInput() {
+    const inputs = document.querySelectorAll("#divName, #dean, #penContact, #locRep, #chair");
+
+    inputs.forEach(input => {
+        input.addEventListener("input", function () {
+            const errorSpan = document.getElementById(`err-${this.id}`);
+            if (errorSpan) errorSpan.style.display = "none";
+        });
+    });
+}
+
+hideErrorsInput();
+
+// Reset all error displays
+function clearErrors() {
+    let errors = document.getElementsByClassName("errors");
+    for (let i = 0; i < errors.length; i++) {
+        errors[i].style.display = "none";
+    }
+}
+
+// Cancel button resets and hides UI
+document.getElementById("edit-form").onreset = () => {
+    divisionInfo.style.display = "none";
+    buttonsContainer.style.display = "none";
+    divisionDropdown.value = "Select";
+    clearErrors();
+};
