@@ -27,7 +27,16 @@
         <input type="hidden" name="id" value="<%= data.id %>">
 
         <label>Division</label>
-        <input type="text" name="divName" value="<%= data.divName %>" readonly>
+        <select name="divisionKey">
+          <% divisions.forEach(div => { %>
+            <option value="<%= div.divisionKey %>" 
+              <%= data.divisionKey === div.divisionKey ? "selected" : "" %>>
+              <%= div.divName %>
+            </option>
+          <% }) %>
+        </select>
+
+
 
 
         <label>Academic Program</label>
