@@ -159,5 +159,36 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<!-- SUCCESS POPUP HTML -->
+<div id="popup" class="popup hidden">
+  <p id="popupMessage"></p>
+</div>
+
+<script>
+// SUCCESS POPUP FUNCTION
+function showPopup(message) {
+  const popup = document.getElementById("popup");
+  const messageElement = document.getElementById("popupMessage");
+
+  messageElement.textContent = message;
+
+  popup.classList.remove("hidden");
+  setTimeout(() => popup.classList.add("show"), 10);
+
+  setTimeout(() => {
+      popup.classList.remove("show");
+      setTimeout(() => popup.classList.add("hidden"), 300);
+  }, 8000);
+}
+</script>
+
+<script>
+// DETECT SERVER REDIRECT SUCCESS FLAG
+const params = new URLSearchParams(window.location.search);
+if (params.get('success') === 'programSaved') {
+    showPopup("Program saved successfully!");
+}
+</script>
+
 </body>
 </html>
