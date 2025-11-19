@@ -16,11 +16,12 @@
             <a href="/">Back to Dashboard</a>
         </div>
 
-        <form id="form" action="/submit-report" method="post">
+        <form id="edit-form" action="/submit-report" method="post">
             <!-- Hidden ID -->
             <input type="hidden" name="id" id="divisionId" value="<%= data?.id || '' %>">
 
             <!-- Dropdown -->
+            <label for="divDropdown">Select Division</label>
             <select id="divDropdown" name="divisionKey">
                 <option value="">Select a Division</option>
                 <% 
@@ -38,9 +39,9 @@
             </select>
 
         
-            <fieldset id="divisionInfo" style="display:none;">
+            <fieldset id="editInfo" style="display:none;">
                 <label>Division:</label>
-                <input id="divName" type="text" name="divName" value="">
+                <input id="divName" type="text" name="divName" value="" readonly>
                 
                 <label>Dean:</label>
                 <input id="dean" type="text" name="dean" value="">

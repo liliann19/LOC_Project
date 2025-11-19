@@ -19,7 +19,7 @@ function showPopup(message) {
 
 
 const divisionDropdown = document.getElementById("divDropdown");
-const divisionInfo = document.getElementById("divisionInfo");
+const divisionInfo = document.getElementById("editInfo");
 const buttonsContainer = document.getElementById("buttonsContainer");
 
 // Get data from sql
@@ -55,17 +55,7 @@ divisionDropdown.addEventListener("change", async function () {
     }
 });
 
-
-
-
-// document.getElementById("form").onreset = () => {
-//     divisionInfo.style.display = "none";
-//     buttonsContainer.style.display = "none";
-//     divisionDropdown.value = "";
-// };
-
-// CANCEL button
-document.getElementById("form").onreset = () => {
+document.getElementById("edit-form").onreset = () => {
     divisionInfo.style.display = "none";
     buttonsContainer.style.display = "none";
     divisionDropdown.value = "";
@@ -77,3 +67,4 @@ document.getElementById("form").onreset = () => {
 document.getElementById("form").onsubmit = () => {
     showPopup("Division saved successfully!");
 };
+

@@ -109,7 +109,7 @@ app.get('/index', async (req, res) => {
     }
 });
 
-// Looks up Div infor through SQL
+// Looks up Div info through SQL
 app.get('/api/division/:divisionKey', async (req, res) => {
     try {
         const key = req.params.divisionKey;
@@ -130,11 +130,11 @@ app.get('/api/division/:divisionKey', async (req, res) => {
 app.get('/editProgram', async (req, res) => {
     try {
         const programId = req.query.id;
-
         if (!programId) {
             return res.status(400).send("Error: No program ID provided.");
         }
 
+   
         const [rows] = await pool.query(
             'SELECT * FROM division_programs WHERE id = ?',
             [programId]
@@ -147,7 +147,16 @@ app.get('/editProgram', async (req, res) => {
         const program = rows[0];
         program.timestamp = convertToPacificTime(program.timestamp);
 
-        res.render('editProgram', { data: program });
+        const [divisions] = await pool.query(`
+            SELECT DISTINCT divisionKey, divName
+            FROM division_programs
+            ORDER BY divName
+        `);
+
+        res.render('editProgram', { 
+            data: program,
+            divisions    
+        });
 
     } catch (err) {
         console.error(err);
@@ -155,37 +164,41 @@ app.get('/editProgram', async (req, res) => {
     }
 });
 
-// Save programs
+// POST edit programs
 app.post('/editProgram/:id', async (req, res) => {
     const id = req.params.id;
     const underReview = req.body.underReview === 'yes' ? 'yes' : 'no';
 
-    const {
-        divName,
-        academicProgram,
-        payee,
-        beenPaid,
-        submitted,
-        notes
-    } = req.body;
-
     try {
-        await pool.execute(
-          `UPDATE division_programs
-          SET divName = ?, academicProgram = ?, payee = ?, beenPaid = ?, 
-              submitted = ?, notes = ?, underReview = ?, timestamp = NOW()
-          WHERE id = ?`,
-          [
-            divName || "",
-            academicProgram || "",
-            payee || "",
-            beenPaid || "",
-            submitted || "",
-            notes || "",
-            underReview,
-            id
-          ]
-        );
+            const { divisionKey, academicProgram, payee, beenPaid, submitted, notes } = req.body;
+
+            
+            const [[div]] = await pool.query(
+                `SELECT divName FROM division_programs WHERE divisionKey = ? LIMIT 1`,
+                [divisionKey]
+            );
+            const divName = div ? div.divName : ""; 
+            console.log(divName);
+            console.log(divisionKey);
+
+            await pool.execute(
+                `UPDATE division_programs
+                SET divisionKey = ?, divName = ?, academicProgram = ?, payee = ?, 
+                    beenPaid = ?, submitted = ?, notes = ?, underReview = ?, timestamp = NOW()
+                WHERE id = ?`,
+                [
+                    divisionKey,
+                    divName,
+                    academicProgram || "",
+                    payee || "",
+                    beenPaid || "",
+                    submitted || "",
+                    notes || "",
+                    underReview,
+                    id
+                ]
+            );
+
 
        // res.redirect('/');
        //can be changed
@@ -197,6 +210,7 @@ app.post('/editProgram/:id', async (req, res) => {
         res.status(500).send('Error updating program');
     }
 });
+
 
 //POST divsion 
 app.post('/submit-report', async (req, res) => {
