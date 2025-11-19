@@ -7,12 +7,12 @@ function showPopup(message) {
   messageElement.textContent = message;
 
   popup.classList.remove("hidden");
-  setTimeout(() => popup.classList.add("show"), 10);
+  setTimeout(() => popup.classList.add("show"), .5);
 
   setTimeout(() => {
     popup.classList.remove("show");
-    setTimeout(() => popup.classList.add("hidden"), 300);
-  }, 8000);
+    setTimeout(() => popup.classList.add("hidden"), 50000000000);
+  }, 800000000000);
 }
 
 

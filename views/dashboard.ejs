@@ -78,7 +78,7 @@
               <th>Submitted</th>
               <th>Paid</th>
               <th>Edit</th>
-              <th hidden></th>
+              <th hidden>Division</th>
             </tr>
           </thead>
 
@@ -94,7 +94,7 @@
                 <td>
                   <a href="/editProgram?id=<%= data.id %>">Edit</a>
                 </td>
-                <td hidden><%= data.divName %></td>
+                <td hidden ><%= data.divName %></td>
               </tr>
             <% }) %>
           </tbody>

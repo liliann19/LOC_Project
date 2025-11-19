@@ -202,7 +202,7 @@ app.post('/editProgram/:id', async (req, res) => {
 
        // res.redirect('/');
        //can be changed
-       res.redirect('/?success=programSaved');
+       setTimeout( () => {res.redirect('/?success=programSaved'); }, 2000);
 
 
     } catch (err) {
@@ -225,8 +225,9 @@ app.post('/submit-report', async (req, res) => {
             [divName, dean, penContact, locRep, chair, divisionKey]
         );
 
-       
-        res.redirect('/index?divisionKey=' + divisionKey + '&success=divisionSaved');
+       console.log(divisionKey)
+       setTimeout(() => { res.redirect('/?divisionKey=' + divisionKey + '&success=divisionSaved');
+       }, 2000);
 
     } catch (err) {
         console.error(err);
