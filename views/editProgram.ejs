@@ -11,8 +11,9 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/styles/styles.css">
 
+
   <!-- JavaScript -->
-  <script src="/js/edit_program.js" defer ></script>
+  <script src="/js/edit_program.js" defer></script>
 </head>
 
 <body>
@@ -29,27 +30,28 @@
         <label>Division</label>
         <select name="divisionKey">
           <% divisions.forEach(div => { %>
-            <option value="<%= div.divisionKey, div.divName %>" 
-              <%= data.divisionKey === div.divisionKey ? "selected" : "" %>>
+            <option value="<%= div.divisionKey %>" 
+              <%= data.divisionKey === div.divisionKey ? "selected" : "" %> >
               <%= div.divName %>
             </option>
           <% }) %>
         </select>
 
-
-
-
         <label>Academic Program</label>
         <input type="text" name="academicProgram" id="academicProgram" value="<%= data.academicProgram %>">
+        <span id="err-academicProgram" class="errors">Academic Program cannot be blank</span>
 
         <label>Payee(s)</label>
-        <input type="text" name="payee" value="<%= data.payee %>">
+        <input type="text" name="payee" id="payee" value="<%= data.payee %>">
+        <span id="err-payee" class="errors">Payee cannot be blank</span>
 
         <label>Has Been Paid</label>
-        <input type="text" name="beenPaid" value="<%= data.beenPaid %>">
+        <input type="text" name="beenPaid" id="beenPaid" value="<%= data.beenPaid %>">
+        <span id="err-beenPaid" class="errors">Has been paid cannot be blank</span>
 
         <label>Report Submitted</label>
-        <input type="text" name="submitted" value="<%= data.submitted %>">
+        <input type="text" name="submitted" id="submitted" value="<%= data.submitted %>">
+        <span id="err-submitted" class="errors">Submitted cannot be blank</span>
 
         <label>Notes</label>
         <textarea name="notes"><%= data.notes %></textarea>
@@ -60,23 +62,19 @@
           Under Review
         </label>
 
-
         <label>Last Updated</label>
         <input type="text" value="<%= data.timestamp %>" disabled>
 
-
-                <!-- Form buttons  -->
-                <button type="submit" id="save-button">Save</button>
-                <a href="/" id="cancel-button">Cancel</a>
+        <!-- Form buttons  -->
+        <button type="submit" id="save-button">Save</button>
+        <a href="/" id="cancel-button">Cancel</a>
       </fieldset>
     </form>
   </main>
 
-
-        <!-- Success Popup -->
-      <div id="popup" class="popup hidden">
-       <p id="popupMessage"></p>
-    </div>
-
-  </body>
+  <!-- Success Popup -->
+  <div id="popup" class="popup hidden">
+    <p id="popupMessage"></p>
+  </div>
+</body>
 </html>

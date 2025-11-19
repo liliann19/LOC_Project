@@ -1,45 +1,58 @@
-// can be changed
-// Success Popup Function
+// showPopup.js
+
 function showPopup(message) {
-  const popup = document.getElementById("popup");
-  const messageElement = document.getElementById("popupMessage");
+    const popup = document.getElementById("popup");
+    const messageElement = document.getElementById("popupMessage");
 
-  messageElement.textContent = message;
+    messageElement.textContent = message;
+    popup.classList.remove("hidden"); // show popup
+    popup.classList.add("show");
 
-  popup.classList.remove("hidden");
-  setTimeout(() => popup.classList.add("show"), .5);
-
-  setTimeout(() => {
-    popup.classList.remove("show");
-    setTimeout(() => popup.classList.add("hidden"), 50000000000);
-  }, 800000000000);
+    setTimeout(() => {
+        popup.classList.remove("show");
+        setTimeout(() => popup.classList.add("hidden"), 500);
+    }, 3000);
 }
-
-
-document.getElementById("edit-form").onsubmit = () => {
-    clearErrors();
-    let isValid = true;
-
-    const academicProgram = (document.getElementById("academicProgram")?.value || "").trim();
-
-    if (!academicProgram) {
-        document.getElementById("err-academicProgram").style.display = "block";
-        isValid = false;
-    }
-
-    // can be changed
-    // show popup only whem valid
-    if (isValid) {
-    showPopup("Program saved successfully!");
-    }
-
-
-
-    return isValid; 
-};
 
 function clearErrors() {
     document.querySelectorAll(".errors").forEach(span => {
         span.style.display = "none";
     });
 }
+
+document.getElementById("edit-form").onsubmit = (event) => {
+    clearErrors();
+    let isValid = true;
+
+    const academicProgram = document.getElementById("academicProgram").value.trim();
+    const payee = document.getElementById("payee").value.trim();
+    const beenPaid = document.getElementById("beenPaid").value.trim();
+    const submitted = document.getElementById("submitted").value.trim();
+
+    if (!academicProgram) {
+        document.getElementById("err-academicProgram").style.display = "block";
+        isValid = false;
+    }
+
+    if (!payee) {
+        document.getElementById("err-payee").style.display = "block";
+        isValid = false;
+    }
+
+    if (!beenPaid) {
+        document.getElementById("err-beenPaid").style.display = "block";
+        isValid = false;
+    }
+
+    if (!submitted) {
+        document.getElementById("err-submitted").style.display = "block";
+        isValid = false;
+    }
+
+    if (!isValid) {
+        event.preventDefault();
+    } else {
+        showPopup("Program saved successfully!");
+    }
+
+};
