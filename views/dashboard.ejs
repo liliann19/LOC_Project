@@ -47,6 +47,7 @@
     </ul>
 
     <a href="/index" class="home-btn">⬅Division Management</a>
+    <a href="/PAI" class="home-btn">⬅PAI Schedule</a>
   </aside>
 
 
@@ -62,9 +63,30 @@
       <% }) %>
     </ul>
   <% } %>
+  <div>
+    <label for="year-select">Select a year:</label>
+    <div>
+      <select>
+        <option id="select" value="select">Select</option>
+        <option id="2022" value="2022">2022</option>
+        <option id="2023" value="2023">2023</option>
+        <option id="2024" value="2024">2024</option>
+        <option id="2025" value="2025">2025</option>
+        <option id="2026" value="2026">2026</option>
+        <option id="2027" value="2027">2027</option>
+        <option id="2028" value="2028">2028</option>
+        <option id="2029" value="2029">2029</option>
+        <option id="2030" value="2030">2030</option>
+        <option id="2031" value="2031">2031</option>
+        <option id="2032" value="2032">2032</option>
+        <option id="2033" value="2033">2033</option>
+      </select>
+    </div>
+  </div>
 </div>
     <div class="page-card">
       <h1 class="page-title">Programs</h1>
+      <h4>Year Selected: </h4>
 
       <div class="table-wrapper">
         <table id="dashboard-table" class="display nowrap" style="width:100%;">
@@ -143,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
       divisionItems.forEach(li => li.classList.remove("active"));
       item.classList.add("active");
 
-      // Filter table
+    
       myTable.search(divName).draw();
     });
   });

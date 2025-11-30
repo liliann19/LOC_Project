@@ -234,6 +234,88 @@ app.post('/submit-report', async (req, res) => {
         res.status(500).send('Error saving division info');
     }
 });
+// GET PAI 
+app.get('/pai', async (req, res) => {
+    try {
+        // all programs
+        const [programs] = await pool.query(
+            'SELECT id, divName, divisionKey, academicProgram FROM division_programs ORDER BY divName, academicProgram'
+        );
+
+        // years
+        const years = ["2022-2023","2023-2024","2024-2025","2025-2026","2026-2027","2027-2028","2028-2029","2029-2030","2030-2031","2031-2032","2032-2033"];
+
+        // all program-year statuses
+        const [statuses] = await pool.query(
+            'SELECT * FROM program_year_status'
+        );
+
+        
+        const programsById = {};
+        programs.forEach(p => {
+            programsById[p.id] = { ...p, underReviewByYear: {} };
+            years.forEach(y => programsById[p.id].underReviewByYear[y] = "no"); // default
+        });
+        statuses.forEach(s => {
+            if (programsById[s.programId]) {
+                programsById[s.programId].underReviewByYear[s.year] = s.underReview;
+            }
+        });
+
+        // by division
+        const divisionMap = {};
+        programs.forEach(p => {
+            if (!divisionMap[p.divName]) divisionMap[p.divName] = { divName: p.divName, programs: [] };
+            divisionMap[p.divName].programs.push(programsById[p.id]);
+        });
+
+        res.render('pai', { divisions: Object.values(divisionMap), years });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Database error');
+    }
+});
+// POST save program-year 
+app.post('/saveYearMatrix', async (req, res) => {
+    try {
+        const updates = req.body.updates; 
+
+        if (!Array.isArray(updates)) {
+            return res.status(400).json({ error: 'Invalid data format' });
+        }
+
+       
+        const conn = await pool.getConnection();
+        try {
+            await conn.beginTransaction();
+
+            for (let u of updates) {
+                const { programId, year, underReview } = u;
+
+                //  update existing row or insert new row if it doesn't exist
+                await conn.query(`
+                    INSERT INTO program_year_status (programId, year, underReview)
+                    VALUES (?, ?, ?)
+                    ON DUPLICATE KEY UPDATE underReview = VALUES(underReview)
+                `, [programId, year, underReview]);
+            }
+
+            await conn.commit();
+            conn.release();
+            res.json({ success: true });
+        } catch (err) {
+            await conn.rollback();
+            conn.release();
+            console.error(err);
+            res.status(500).json({ error: 'Database update failed' });
+        }
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 
 
 app.listen(PORT, () => {
