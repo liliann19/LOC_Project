@@ -48,7 +48,7 @@ function convertToPacificTime(mysqlTimestamp) {
 // Dashboard
 app.get('/', async (req, res) => {
     const [underReviewPrograms] = await pool.query(
-        `SELECT academicProgram, divName FROM division_programs WHERE underReview = 'yes' ORDER BY divName`
+        `SELECT id, academicProgram, divName FROM division_programs WHERE underReview = 'yes' ORDER BY divName`
     );
 
 

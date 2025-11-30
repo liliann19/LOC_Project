@@ -58,7 +58,12 @@
   <% } else { %>
     <ul>
       <% underReviewPrograms.forEach(p => { %>
-        <li><strong><%= p.academicProgram %></strong> — <%= p.divName %></li>
+        <li>
+         <a href="/editProgram?id=<%= p.id %>" class="program-link">
+        <strong><%= p.academicProgram %></strong>
+         </a> — <%= p.divName %>
+        </li>
+
       <% }) %>
     </ul>
   <% } %>
