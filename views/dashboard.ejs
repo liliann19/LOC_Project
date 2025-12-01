@@ -5,73 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
 
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="/images/gator-icon.png">
+
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="/styles/styles.css">
 
+  <!-- DataTables Libraries -->
   <script src="//code.jquery.com/jquery-3.7.1.js"></script>
   <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
   <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+
+  <!-- Responsive DataTables plugin -->
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
   <script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
 </head>
 
 <body>
-<div class="dashboard-container">
+  <div class="dashboard-container">
 
-  <!-- SIDEBAR  -->
-  <aside class="sidebar">
-    <h2>Divisions</h2>
+    <!-- Sidebar  -->
+    <aside class="sidebar">
+      <h2>Divisions</h2>
 
-    <ul id="divisionList">
-      <% 
-        // Build unique list of divisions from SQL rows
-        const uniqueDivisions = {};
+      <!-- Sidebar division list dynamically generated -->
+      <ul id="divisionList">
+        <% 
+          // Build unique list of divisions from SQL rows
+          const uniqueDivisions = {};
 
-        data.forEach(row => {
-          if (!uniqueDivisions[row.divisionKey]) {
-            uniqueDivisions[row.divisionKey] = row;
-          }
-        });
+          // Prevent duplicate division entries by using divisionKey as the dictionary key
+          data.forEach(row => {
+            if (!uniqueDivisions[row.divisionKey]) {
+              uniqueDivisions[row.divisionKey] = row;
+            }
+          });
 
-        Object.keys(uniqueDivisions).forEach(divKey => {
-      %>
-      <li 
-        class="division-item"
-        data-key="<%= divKey %>"
-        data-name="<%= uniqueDivisions[divKey].divName %>"
-      >
-        <%= uniqueDivisions[divKey].divName %>
-      </li>
-
-      <% }) %>
-    </ul>
-
-    <a href="/index" class="home-btn">⬅Division Management</a>
-    <a href="/PAI" class="home-btn">⬅PAI Schedule</a>
-  </aside>
-
-
-  <main class="dashboard-main">
-<div class="card under-review-card">
-  <h3>To Do: Programs currently under review</h3>
-  <% if (underReviewPrograms.length === 0) { %>
-    <p>No programs currently under review.</p>
-  <% } else { %>
-    <ul>
-      <% underReviewPrograms.forEach(p => { %>
-        <li>
-         <a href="/editProgram?id=<%= p.id %>" class="program-link">
-        <strong><%= p.academicProgram %></strong>
-         </a> — <%= p.divName %>
+          // Loop through each division and create clickable sidebar items
+          Object.keys(uniqueDivisions).forEach(divKey => {
+        %>
+        <li class="division-item" data-key="<%= divKey %>" data-name="<%= uniqueDivisions[divKey].divName %>">
+          <%= uniqueDivisions[divKey].divName %>
         </li>
 
-      <% }) %>
-    </ul>
-  <% } %>
-  <div>
-    <label for="year-select">Select a year:</label>
+        <% }) %>
+      </ul>
+
+      <%# Button linking back to division management page %>
+      <a href="/index" class="home-btn">⬅Division Management</a>
+
+      <%# Link to PAI schedule overview page %>
+      <a href="/PAI" class="home-btn">⬅PAI Schedule</a>
+    </aside>
+
+    <%# Main dashboard content %>
+    <main class="dashboard-main">
+
+    <%# Card showing programs currently under review %>
+    <div class="card under-review-card">
+      <h3>To Do: Programs currently under review</h3>
+      <% if (underReviewPrograms.length === 0) { %>
+        <p>No programs currently under review.</p>
+        <% } else { %>
+          <ul>
+            <% underReviewPrograms.forEach(p => { %>
+              <li>
+                <a href="/editProgram?id=<%= p.id %>" class="program-link">
+                  <strong><%= p.academicProgram %></strong> </a> — <%= p.divName %>
+              </li>
+              <% }) %>
+          </ul>
+          <% } %>
+    
+    <label for="year-select" class="year-label">Select a year:</label>
     <div>
-      <select>
+      <select id="year-select" class="year-dropdown">
         <option id="select" value="select">Select</option>
         <option id="2022" value="2022">2022</option>
         <option id="2023" value="2023">2023</option>
@@ -88,12 +96,14 @@
       </select>
     </div>
   </div>
-</div>
+
+    <%# Main programs table %>
     <div class="page-card">
       <h1 class="page-title">Programs</h1>
       <h4>Year Selected: </h4>
 
       <div class="table-wrapper">
+        <%# Datatable %>
         <table id="dashboard-table" class="display nowrap" style="width:100%;">
           <thead>
             <tr>
@@ -118,7 +128,7 @@
                 <td><%= data.submitted %></td>
                 <td><%= data.beenPaid %></td>
                 <td>
-                  <a href="/editProgram?id=<%= data.id %>">Edit</a>
+                  <a href="/editProgram?id=<%= data.id %>">Edit</a> <%# Edit link sends user to program edit page %>
                 </td>
                 <td hidden ><%= data.divName %></td>
               </tr>
@@ -129,7 +139,7 @@
       </div>
     </div>
 
-    
+    <%# Recent activity log %>
     <aside class="activity-card">
       <h2>Recent Changes</h2>
 
@@ -145,18 +155,16 @@
           <% }) %>
         <% } %>
       </ul>
-
     </aside>
   </main>
 </div>
 
-
+<%# Dashboard table initialization %>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const myTable = new DataTable('#dashboard-table', {
-    responsive: true,
-    scrollX: true,
+  document.addEventListener("DOMContentLoaded", function () {
+    const myTable = new DataTable('#dashboard-table', {
+      responsive: true,
+      scrollX: true,
   });
 
   const divisionItems = document.querySelectorAll(".division-item");
@@ -166,16 +174,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const divName = item.getAttribute("data-name");  
 
-    
       divisionItems.forEach(li => li.classList.remove("active"));
       item.classList.add("active");
 
-    
+      // Filter the table by the selected division name
       myTable.search(divName).draw();
     });
   });
 
 });
 </script>
+
 </body>
 </html>

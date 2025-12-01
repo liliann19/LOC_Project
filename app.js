@@ -1,11 +1,15 @@
+// Import dependencies
 import express from 'express';
 import mysql2 from "mysql2";
 import dotenv from 'dotenv';
 
+// Load .env variables
 dotenv.config();
 
+// Initialize express
 const app = express();
 
+// Create a MySQL connection pool 
 const pool = mysql2.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -14,19 +18,18 @@ const pool = mysql2.createPool({
     port: process.env.DB_PORT
 }).promise();
 
-
+// Port server will listen on
 const PORT = 3005;
 
-
+// To serve static files
 app.use(express.static('public'));
 
-
+// Set EJS as the template engine
 app.set('view engine', 'ejs');
-
 
 app.use(express.urlencoded({ extended: true }));
 
-//Wa timezone
+// Convert MySQL tiimestamp to Pacific Time
 function convertToPacificTime(mysqlTimestamp) {
     if (!mysqlTimestamp) return '';
     const date = new Date(mysqlTimestamp + 'Z');
@@ -44,13 +47,11 @@ function convertToPacificTime(mysqlTimestamp) {
     });
 }
 
-
 // Dashboard
 app.get('/', async (req, res) => {
     const [underReviewPrograms] = await pool.query(
         `SELECT id, academicProgram, divName FROM division_programs WHERE underReview = 'yes' ORDER BY divName`
     );
-
 
     try {
         const [rows] = await pool.query(
@@ -71,14 +72,13 @@ app.get('/', async (req, res) => {
 
         res.render('dashboard', { data: rows, recentChanges, underReviewPrograms });
 
-
     } catch (err) {
         console.error('Database Error:', err);
         res.status(500).send('Database error');
     }
 });
 
-// Divsion management 
+// Divsion management page
 app.get('/index', async (req, res) => {
     try {
         const [rows] = await pool.query(
@@ -109,7 +109,7 @@ app.get('/index', async (req, res) => {
     }
 });
 
-// Looks up Div info through SQL
+// Looks up Division info through SQL
 app.get('/api/division/:divisionKey', async (req, res) => {
     try {
         const key = req.params.divisionKey;
@@ -198,11 +198,9 @@ app.post('/editProgram/:id', async (req, res) => {
             ]
         );
 
-
-        //    res.redirect('/');
-        //can be changed
+        // res.redirect('/');
+        // can be changed
         setTimeout(() => { res.redirect('/?success=programSaved'); }, 2000);
-
 
     } catch (err) {
         console.error(err);
@@ -211,11 +209,10 @@ app.post('/editProgram/:id', async (req, res) => {
 });
 
 
-//POST divsion 
+//POST division 
 app.post('/submit-report', async (req, res) => {
     try {
         const { divisionKey, divName, dean, penContact, locRep, chair } = req.body;
-
 
         await pool.execute(
             `UPDATE division_programs
@@ -234,6 +231,7 @@ app.post('/submit-report', async (req, res) => {
         res.status(500).send('Error saving division info');
     }
 });
+
 // GET PAI 
 app.get('/pai', async (req, res) => {
     try {
@@ -276,6 +274,7 @@ app.get('/pai', async (req, res) => {
         res.status(500).send('Database error');
     }
 });
+
 // POST save program-year 
 app.post('/saveYearMatrix', async (req, res) => {
     try {
@@ -285,7 +284,6 @@ app.post('/saveYearMatrix', async (req, res) => {
             return res.status(400).json({ error: 'Invalid data format' });
         }
 
-       
         const conn = await pool.getConnection();
         try {
             await conn.beginTransaction();
@@ -317,7 +315,7 @@ app.post('/saveYearMatrix', async (req, res) => {
     }
 });
 
-
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

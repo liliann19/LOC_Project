@@ -8,8 +8,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/gator-icon.png">
 
-    <!-- Scripts -->
+    <!-- JavaScript -->
     <script src="js/LOC_Project.js" defer></script>
+
+    <!-- DataTables Libraries -->
     <script src="//code.jquery.com/jquery-3.7.1.js"></script>
     <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
@@ -17,82 +19,106 @@
     <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
     <link rel="stylesheet" href="/styles/styles.css">
 
-    <!-- Table responsive layout libraries -->
+    <!-- Responsive DataTables plugin -->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
     <script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
-
-
-    <!-- To make summary table responsive -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        new DataTable('#report-table', {
-            responsive: true, // enable responsive behavior
-            columnDefs: [
-                { responsivePriority: 1, targets: '_all' } // show all columns, even on small screens
-            ],
-            scrollX: true
-        });
-    });
-</script>
-
 </head>
+
 <body>
     <main id="summary-main">
-    <h1>Summary Page</h1>
-    <!-- Confirmation that changes were made -->
-    <% if (saved) { %>
-    <p id="save-message">Changes saved!</p>
-    <% } %>
+        <h1>Summary Page</h1>
 
-    <a href="/">Division Management</a>
+        <!-- Confirmation that changes were made -->
+        <% if (saved) { %>
+            <p id="save-message">Changes saved!</p>
+            <% } %>
+            
+                <!-- Button link back to division dashboard -->
+                <a href="/">Division Management</a>
 
-    <!-- Summary table -->
-    <table id="report-table" class="display">
-        <thead>
-            <tr>
-                <th>Division</th>
-                <th>Academic Program</th>
-                <th>Division Chair</th>
-                <th>Dean</th>
-                <th>LOC Rep</th>
-                <th>PEN Contact</th>
-                <th>Payee(s)</th>
-                <th>Has Been Paid (Yes/No)</th>
-                <th>Report Submitted(Yes/No)</th>
-                <th>Notes</th>
-                <th>Date</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
+                <!-- Summary table -->
+                <table id="report-table" class="display">
+                    <thead>
+                        <tr>
+                            <th>Division</th>
+                            <th>Academic Program</th>
+                            <th>Division Chair</th>
+                            <th>Dean</th>
+                            <th>LOC Rep</th>
+                            <th>PEN Contact</th>
+                            <th>Payee(s)</th>
+                            <th>Has Been Paid (Yes/No)</th>
+                            <th>Report Submitted(Yes/No)</th>
+                            <th>Notes</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
 
-            <tbody id="program-table-body">
-            <!-- Loop through divisions and programs -->
-            <% 
-            Object.keys(divisionData).forEach(key => {
-            const div = divisionData[key];
-            const programs = div.programs || [];
-            %>
-            <% programs.forEach((program, i) => { %>
-                <tr data-division="<%= key %>" data-index="<%= i %>">
-                <td class="division"><%= div.divName %></td>
-                <td class="academicProgram"><%= program.academicProgram %></td>
-                <td class="chair"><%= div.chair %></td>
-                <td class="dean"><%= div.dean %></td>
-                <td class="locRep"><%= div.locRep %></td>
-                <td class="penContact"><%= div.penContact %></td>
-                <td class="payee"><%= program.payee %></td>
-                <td class="beenPaid"><%= program.beenPaid %></td>
-                <td class="submitted"><%= program.submitted %></td>
-                <td class="notes"><%= program.notes %></td>
-                <td class="timestamp"><%= div.timestamp %></td>
-                <td>
-                <a href="/editProgram?divisionKey=<%= key %>&programIndex=<%= i %>">Edit</a>
-                </td>
-                </tr>
-            <% }); %>
-            <% }); %>
-            </tbody>
-    </table>
+                    <tbody id="program-table-body">
+                        <!-- Loop through divisions and programs -->
+                        <% Object.keys(divisionData).forEach(key=> {
+                            const div = divisionData[key];
+                            const programs = div.programs || [];
+                            %>
+                            <% programs.forEach((program, i)=> { %>
+                                <tr data-division="<%= key %>" data-index="<%= i %>">
+                                    <td class="division">
+                                        <%= div.divName %>
+                                    </td>
+                                    <td class="academicProgram">
+                                        <%= program.academicProgram %>
+                                    </td>
+                                    <td class="chair">
+                                        <%= div.chair %>
+                                    </td>
+                                    <td class="dean">
+                                        <%= div.dean %>
+                                    </td>
+                                    <td class="locRep">
+                                        <%= div.locRep %>
+                                    </td>
+                                    <td class="penContact">
+                                        <%= div.penContact %>
+                                    </td>
+                                    <td class="payee">
+                                        <%= program.payee %>
+                                    </td>
+                                    <td class="beenPaid">
+                                        <%= program.beenPaid %>
+                                    </td>
+                                    <td class="submitted">
+                                        <%= program.submitted %>
+                                    </td>
+                                    <td class="notes">
+                                        <%= program.notes %>
+                                    </td>
+                                    <td class="timestamp">
+                                        <%= div.timestamp %>
+                                    </td>
+                                    <td>
+                                        <%# Edit link loads the correct program using query parameters %>
+                                        <a href="/editProgram?divisionKey=<%= key %>&programIndex=<%= i %>">Edit</a>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                                    <% }); %>
+                    </tbody>
+                </table>
     </main>
+
+    <%# To make summary table responsive %>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                new DataTable('#report-table', {
+                    responsive: true, // enable responsive behavior
+                    columnDefs: [
+                        { responsivePriority: 1, targets: '_all' } // show all columns, even on small screens
+                    ],
+                    scrollX: true
+                });
+            });
+        </script>
+        
 </body>
 </html>

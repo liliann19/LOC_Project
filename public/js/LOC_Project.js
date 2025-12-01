@@ -5,9 +5,11 @@ function showPopup(message) {
 
     messageElement.textContent = message;
 
+    // Show popup
     popup.classList.remove("hidden");
     setTimeout(() => popup.classList.add("show"), .5);
 
+    // Hide popup after a delay
     setTimeout(() => {
         popup.classList.remove("show");
         setTimeout(() => popup.classList.add("hidden"), 50000000000);
@@ -27,16 +29,20 @@ async function loadDivisionFromSQL(divKey) {
     return rows[0] || null;
 }
 
+// when user selects division, fetch and display its info
 divisionDropdown.addEventListener("change", async function () {
     const selectedKey = this.value;
 
     if (selectedKey) {
+        // show division form and buttons
         divisionInfo.style.display = "block";
         buttonsContainer.style.display = "block";
 
+        // load division data from server
         const division = await loadDivisionFromSQL(selectedKey);
 
         if (division) {
+            // populate form fields with division data
             document.getElementById("divisionId").value = division.id;
             document.getElementById("divName").value = division.divName || "";
             document.getElementById("dean").value = division.dean || "";
@@ -45,11 +51,14 @@ divisionDropdown.addEventListener("change", async function () {
             document.getElementById("chair").value = division.chair || "";
         }
     } else {
+        // hide form and buttons if no division selected
         divisionInfo.style.display = "none";
         buttonsContainer.style.display = "none";
     }
 });
 
+// Reset Form 
+// hides form and buttons when user resets the form
 document.getElementById("edit-form").onreset = () => {
     divisionInfo.style.display = "none";
     buttonsContainer.style.display = "none";
@@ -58,18 +67,20 @@ document.getElementById("edit-form").onreset = () => {
     showPopup("Changes canceled");
 };
 
-//save button
+// Form submission / Save Button
 // Validation logic
 document.getElementById("edit-form").onsubmit = () => {
-    clearErrors();
+    clearErrors(); // reset error messages
     let isValid = true;
 
+    // get input values
     const divName = document.getElementById("divName").value.trim();
     const dean = document.getElementById("dean").value.trim();
     const penContact = document.getElementById("penContact").value.trim();
     const locRep = document.getElementById("locRep").value.trim();
     const chair = document.getElementById("chair").value.trim();
 
+    // validate each field and show errors if empty
     if (!divName) {
         document.getElementById("err-divName").style.display = "block";
         isValid = false;
@@ -126,3 +137,10 @@ document.getElementById("edit-form").onreset = () => {
     divisionDropdown.value = "Select";
     clearErrors();
 };
+
+// Confirmation message
+const params = new URLSearchParams(window.location.search);
+
+if (params.get('success') === 'divisionSaved') {
+    showPopup("Division saved successfully!");
+}

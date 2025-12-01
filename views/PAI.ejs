@@ -5,90 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PAI Year-Program Schedule</title>
 
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    h2 { margin-top: 30px; border-bottom: 2px solid #333; padding-bottom: 5px; }
-    table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
-    th { background: #f0f0f0; }
-    td.program-name { text-align: left; }
-    input[type=checkbox] { transform: scale(1.2); }
-    .button-wrapper { margin-bottom: 20px; }
-  </style>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/styles/styles.css">
+
+  <!-- JavaScript -->
+  <script src="js/pai-page.js" defer></script>
 </head>
+
 <body>
+  <!-- Main PAI page container -->
+  <div class="pai-page">
+    <h1>Program Assessment and Improvement Schedule</h1>
+    <p>Last revised 11/13/2025</p>
 
-  <h1>Program Assessment and Improvement Schedule</h1>
-  <p>Last revised 11/13/2025</p>
+    <!-- Buttons -->
+    <div class="button-wrapper">
+      <!-- Link to return to dashboard -->
+      <a href="/" class="back-dashboard">⬅Back to Dashboard</a>
 
-  <div class="button-wrapper">
-    <button id="editMode">Edit</button>
-    <button id="saveChanges" style="display:none;">Save</button>
+      <!-- Button to enable editing mode -->
+      <button id="editMode">Edit</button>
+
+      <!--  Button to save changes -->
+      <button id="saveChanges" style="display:none;">Save</button>
+
+      <!-- Button to cancel changes -->
+      <button id="cancelChanges" style="display:none;">Cancel</button>
+    </div>
+
+    <!-- Loop through each division -->
+    <% divisions.forEach(div=> { %>
+      <h2>
+        <!-- Division heading -->
+        <%= div.divName %>
+      </h2>
+      <!-- Table of programs for each division -->
+      <table>
+        <thead>
+          <tr>
+            <th>Program</th>
+            <!-- Loop through each year for column headers -->
+            <% years.forEach(y=> { %>
+              <th>
+                <%= y %>
+              </th>
+              <% }) %>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Loop through each program in the division -->
+          <% div.programs.forEach(p=> { %>
+            <tr>
+              <!-- Program name -->
+              <td class="program-name">
+                <%= p.academicProgram %>
+              </td>
+              <!-- Checkboxes for each year -->
+              <% years.forEach(y=> { %>
+                <td>
+                  <input type="checkbox" class="ur-box" data-program="<%= p.id %>" data-year="<%= y %>" <% if
+                    (p.underReviewByYear[y]==="yes" ) { %> checked <% } %>
+                    disabled>
+                </td>
+                <% }) %>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+      <% }) %>
   </div>
 
-  <% divisions.forEach(div => { %>
-    <h2><%= div.divName %></h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Program</th>
-          <% years.forEach(y => { %>
-            <th><%= y %></th>
-          <% }) %>
-        </tr>
-      </thead>
-      <tbody>
-        <% div.programs.forEach(p => { %>
-          <tr>
-            <td class="program-name"><%= p.academicProgram %></td>
-            <% years.forEach(y => { %>
-              <td>
-                <input type="checkbox"
-                       class="ur-box"
-                       data-program="<%= p.id %>"
-                       data-year="<%= y %>"
-                       <% if (p.underReviewByYear[y] === "yes") { %> checked <% } %>
-                       disabled>
-              </td>
-            <% }) %>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% }) %>
+  <%# Confirmation popup %>
+  <div id="popup" class="popup hidden">
+    <span id="popupMessage"></span>
+  </div>
 
-  <script>
-    document.getElementById("editMode").addEventListener("click", () => {
-      document.querySelectorAll(".ur-box").forEach(box => box.disabled = false);
-      document.getElementById("saveChanges").style.display = "inline-block";
-    });
-
-    document.getElementById("saveChanges").addEventListener("click", () => {
-      const updates = [];
-      document.querySelectorAll(".ur-box").forEach(box => {
-        updates.push({
-          programId: box.dataset.program,
-          year: box.dataset.year,
-          underReview: box.checked ? "yes" : "no"
-        });
-      });
-
-      fetch("/saveYearMatrix", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ updates })
-      })
-      .then(res => res.json())
-      .then(data => {
-        alert("Saved successfully!");
-        document.querySelectorAll(".ur-box").forEach(box => box.disabled = true);
-        document.getElementById("saveChanges").style.display = "none";
-      })
-      .catch(err => {
-        console.error(err);
-        alert("Error saving data.");
-      });
-    });
-  </script>
 </body>
 </html>
