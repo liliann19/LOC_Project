@@ -27,7 +27,9 @@ app.use(express.static('public'));
 // Set EJS as the template engine
 app.set('view engine', 'ejs');
 
+app.use(express.json()); // <-- add this
 app.use(express.urlencoded({ extended: true }));
+
 
 // Convert MySQL tiimestamp to Pacific Time
 function convertToPacificTime(mysqlTimestamp) {
@@ -49,34 +51,50 @@ function convertToPacificTime(mysqlTimestamp) {
 
 // Dashboard
 app.get('/', async (req, res) => {
-    const [underReviewPrograms] = await pool.query(
-        `SELECT id, academicProgram, divName FROM division_programs WHERE underReview = 'yes' ORDER BY divName`
-    );
-
     try {
-        const [rows] = await pool.query(
+        const selectedYear = req.query.year || "2025-2026"; 
+
+
+        // all programs
+        const [programs] = await pool.query(
             'SELECT * FROM division_programs ORDER BY divName, academicProgram'
         );
 
-        rows.forEach(row => {
-            row.timestamp = convertToPacificTime(row.timestamp);
-        });
+       
+        const [statuses] = await pool.query(
+            'SELECT programId, underReview FROM program_year_status WHERE year = ?',
+            [selectedYear]
+        );
+
+    
+        const statusMap = {};
+        statuses.forEach(s => { statusMap[s.programId] = s.underReview; });
+
+      
+        const underReviewPrograms = programs.filter(p => statusMap[p.id] === "yes");
+
+        // timestamps
+        programs.forEach(p => { p.timestamp = convertToPacificTime(p.timestamp); });
 
         const [recentChanges] = await pool.query(
             'SELECT divName, academicProgram, timestamp FROM division_programs ORDER BY timestamp DESC LIMIT 5'
         );
+        recentChanges.forEach(r => { r.timestamp = convertToPacificTime(r.timestamp); });
 
-        recentChanges.forEach(row => {
-            row.timestamp = convertToPacificTime(row.timestamp);
+        res.render('dashboard', {
+            data: programs,
+            recentChanges,
+            underReviewPrograms,
+            selectedYear
         });
-
-        res.render('dashboard', { data: rows, recentChanges, underReviewPrograms });
 
     } catch (err) {
         console.error('Database Error:', err);
         res.status(500).send('Database error');
     }
 });
+
+
 
 // Divsion management page
 app.get('/index', async (req, res) => {
@@ -278,6 +296,9 @@ app.get('/pai', async (req, res) => {
 // POST save program-year 
 app.post('/saveYearMatrix', async (req, res) => {
     try {
+        // console.log('req.body:', req.body);
+        // console.log('updates:', req.body ? req.body.updates : undefined);
+
         const updates = req.body.updates; 
 
         if (!Array.isArray(updates)) {

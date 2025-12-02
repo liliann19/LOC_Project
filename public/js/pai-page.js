@@ -92,3 +92,44 @@ if (editBtn && saveBtn && cancelBtn && checkboxes.length > 0) {
         showPopup("Changes canceled");
     });
 }
+
+
+const spinner = document.getElementById("savingSpinner");
+
+saveBtn.addEventListener("click", async () => {
+    const updates = Array.from(checkboxes).map(box => ({
+        programId: box.dataset.program,
+        year: box.dataset.year,
+        underReview: box.checked ? "yes" : "no"
+    }));
+
+    try {
+        // Show spinner
+        spinner.classList.remove("hidden");
+
+        const res = await fetch("/saveYearMatrix", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ updates })
+        });
+
+        const data = await res.json();
+
+        // Hide spinner
+        spinner.classList.add("hidden");
+
+        if (data.success) {
+            showPopup("Saved successfully!");
+            checkboxes.forEach(box => box.disabled = true);
+            saveBtn.style.display = "none";
+            cancelBtn.style.display = "none";
+        } else {
+            showPopup("Error saving data");
+        }
+
+    } catch (err) {
+        spinner.classList.add("hidden");
+        console.error(err);
+        showPopup("Error saving data");
+    }
+});

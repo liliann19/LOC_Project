@@ -77,23 +77,17 @@
           </ul>
           <% } %>
     
-    <label for="year-select" class="year-label">Select a year:</label>
+   
     <div>
-      <select id="year-select" class="year-dropdown">
-        <option id="select" value="select">Select</option>
-        <option id="2022" value="2022">2022</option>
-        <option id="2023" value="2023">2023</option>
-        <option id="2024" value="2024">2024</option>
-        <option id="2025" value="2025">2025</option>
-        <option id="2026" value="2026">2026</option>
-        <option id="2027" value="2027">2027</option>
-        <option id="2028" value="2028">2028</option>
-        <option id="2029" value="2029">2029</option>
-        <option id="2030" value="2030">2030</option>
-        <option id="2031" value="2031">2031</option>
-        <option id="2032" value="2032">2032</option>
-        <option id="2033" value="2033">2033</option>
-      </select>
+      <label for="year-select" class="year-label">Select a year:</label>
+        <select id="year-select" class="year-dropdown">
+          <% const years = ["2022-2023","2023-2024","2024-2025","2025-2026","2026-2027","2027-2028","2028-2029","2029-2030","2030-2031","2031-2032","2032-2033"]; %>
+          <% years.forEach(y => { %>
+            <option value="<%= y %>" <% if (selectedYear === y) { %> selected <% } %>><%= y %></option>
+          <% }) %>
+        </select>
+
+
     </div>
   </div>
 
@@ -183,6 +177,18 @@
   });
 
 });
+
+
+      const yearDropdown = document.getElementById("year-select");
+
+      yearDropdown.addEventListener("change", () => {
+          const selectedYear = yearDropdown.value;
+          if (selectedYear !== "select") {
+              // Reload dashboard with selected year as query parameter
+              window.location.href = `/?year=${selectedYear}`;
+          }
+      });
+
 </script>
 
 </body>
