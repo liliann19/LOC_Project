@@ -285,7 +285,7 @@ app.get('/pai', async (req, res) => {
             divisionMap[p.divName].programs.push(programsById[p.id]);
         });
 
-        res.render('pai', { divisions: Object.values(divisionMap), years });
+        res.render('PAI', { divisions: Object.values(divisionMap), years });
 
     } catch (err) {
         console.error(err);
