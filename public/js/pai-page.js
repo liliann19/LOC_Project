@@ -1,3 +1,18 @@
+/*
+  pai-page.js 
+  
+  JavaScript for the PAI Year-Program Schedule page.
+
+  Responsibilities:
+  - Handles the "Edit", "Save", and "Cancel" workflow for the PAI checkboxes.
+  - Tracks original checkbox state to allow reverting on cancel.
+  - Sends updated checkbox states to the server via POST request to /saveYearMatrix.
+  - Shows success/error popups for user feedback.
+  - Displays a spinner while saving changes to indicate progress.
+  - Ensures checkboxes are disabled outside of edit mode.
+*/
+
+
 // Success Popup Function
 function showPopup(message) {
     const popup = document.getElementById("popup");

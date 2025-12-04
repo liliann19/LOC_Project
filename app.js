@@ -1,3 +1,11 @@
+/** 
+ * app.js 
+ * 
+ * Main server entry point: initializes Express, connects to MySQL, configures middleware and EJS,
+ * and handles all routes for rendering pages and processing database operations.
+ * 
+ */
+
 // Import dependencies
 import express from 'express';
 import mysql2 from "mysql2";

@@ -1,9 +1,18 @@
-/* PAI Page Styles */
+/*******************************************************************
+ * pai.css
+ *
+ * Purpose: Stylesheet for the PAI (Program Assessment Index) page.
+ * This file handles layout, headings, tables, checkboxes, buttons,
+ * and back-to-dashboard link for the PAI page.
+ *******************************************************************/
+
+/* Overall Page Layout */
 .pai-page {
   font-family: Arial, sans-serif;
   padding: 20px;
 }
 
+/* Main Page Heading */
 .pai-page h1 {
   text-align: center;
   margin-bottom: 10px;

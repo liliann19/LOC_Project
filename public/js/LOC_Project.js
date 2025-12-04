@@ -1,3 +1,19 @@
+/*
+  LOC_Project.js 
+  
+  JavaScript for the Division Management page.
+
+  Responsibilities:
+  - Handles division selection from dropdown and dynamically loads division details from the server.
+  - Shows/hides the edit form and action buttons (Save/Cancel) based on user interactions.
+  - Performs client-side validation for all division info fields before submitting the form.
+  - Displays inline error messages when fields are empty and hides them when the user types.
+  - Provides success/error popups to give user feedback.
+  - Supports resetting the form and reverting changes via Cancel button.
+  - Detects URL query parameters to show confirmation messages after successful saves.
+*/
+
+
 // Success Popup Function
 function showPopup(message) {
     const popup = document.getElementById("popup");

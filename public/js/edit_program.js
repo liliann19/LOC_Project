@@ -1,3 +1,15 @@
+/*
+  edit_program.js — JavaScript for client-side behavior on the Edit Program page.
+
+  Responsibilities:
+  - Provides a success popup for user feedback when form actions succeed.
+  - Validates form input fields (academic program, payee, been paid, submitted) before submission.
+  - Displays inline error messages for empty required fields.
+  - Prevents form submission if validation fails.
+  - Clears error messages when the form is being revalidated or resubmitted.
+*/
+
+
 // Success Popup Function
 function showPopup(message) {
     const popup = document.getElementById("popup");
