@@ -1,0 +1,116 @@
+/* PAI Page Styles */
+.pai-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.pai-page h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.pai-page p {
+  text-align: center;
+  margin-bottom: 20px;
+  font-style: italic;
+  color: #555;
+}
+
+/* PAI Section titles (Division headings) */
+.pai-page h2 {
+  margin-top: 30px;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+}
+
+/* PAI Table styling */
+.pai-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.pai-page th,
+.pai-page td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.pai-page th {
+  background-color: #2c882b;
+}
+
+.pai-page td.program-name {
+  text-align: left;
+}
+
+/* PAI Checkbox styling */
+.pai-page input[type=checkbox] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* PAI Button wrapper */
+.pai-page .button-wrapper {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.pai-page .button-wrapper button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Edit Button */
+.pai-page .button-wrapper #editMode {
+  background-color: #2c882b;
+  color: white;
+}
+
+.pai-page .button-wrapper #editMode:hover {
+  background-color: #16a34a;
+}
+
+/* Save Button */
+.pai-page .button-wrapper #saveChanges {
+  background-color: #2563eb; 
+  color: white;
+}
+
+.pai-page .button-wrapper #saveChanges:hover {
+  background-color: #1d4ed8;
+}
+
+/* Cancel Button */
+.pai-page .button-wrapper #cancelChanges {
+  background-color: #d10d0d; 
+  color: white;
+}
+
+.pai-page .button-wrapper #cancelChanges:hover {
+  background-color: #a00a0a;
+}
+
+/* Back to Dashboard Button  */
+.pai-page .back-dashboard {
+  position: absolute;      
+  top: 20px;               
+  left: 20px;              
+  background-color: #2c882b;  
+  color: white;
+  padding: 10px 18px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.pai-page .back-dashboard:hover {
+  background-color: #1f5f1f; 
+}

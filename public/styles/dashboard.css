@@ -1,0 +1,109 @@
+/* Dashborad Layout*/
+.dashboard-container {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0 1rem 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  background-color: #f5f6f7;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #2c882b;
+  color: white;
+  border-radius: 8px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  flex: 0 0 200px;
+  padding: 1rem;
+}
+.sidebar {
+  max-width: 200px;
+}
+
+
+.sidebar h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Sidebar items (Division list) */
+.division-item {
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.division-item:hover {
+  background-color: #16a34a;
+}
+
+.division-item.active {
+  background-color: #ffffff44;
+  font-weight: bold;
+}
+
+/* Main content */
+.dashboard-main {
+  padding-right: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+}
+
+/* Page title */
+.page-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Edit button in table */
+#dashboard-table td a {
+  display: inline-block;
+  padding: 4px 10px;
+  background-color: #2c882b;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+#dashboard-table td a:hover {
+  background-color: #1f5f1f;
+  transform: translateY(-1px);
+}
+
+/* Link styling for 'Programs under review' */
+.program-link {
+  color: #4CAF50;      
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.program-link:hover {
+  color: #1E6A1D;      
+  text-decoration: underline;
+}
+
+
+
+
+
+
